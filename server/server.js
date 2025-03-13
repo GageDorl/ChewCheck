@@ -36,7 +36,7 @@ request(options, function (error, response, body) {
 
 app.get('/api/data', async (req, res) => {
     try{
-        const url = `https://platform.fatsecret.com/rest/server.api?method=foods.search&format=json&search_expression=${req.query.query}`;
+        const url = `${FAT_SECRET_BASE_URL}?method=foods.search&format=json&search_expression=${req.query.query}`;
         const headers = {
             "Authorization": `Bearer ${token}`
 
