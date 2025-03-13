@@ -1,8 +1,14 @@
 {
   "dependencies": {
+    "concurrently": "^9.1.2",
+    "nodemon": "^3.1.9",
     "vite": "^6.2.1"
   },
-  "scripts":{
-    "start" : "cd ChewCheck && npm run start"
+  "scripts": {
+    "start": "cd ChewCheck && npm run start",
+    "server": "cd server && node server.js",
+    "dev": "concurrently \"npm run server\" \"npm run start\"",
+    "build": "cd ChewCheck && npm run build",
+    "preview": "cd ChewCheck && npm run preview"
   }
 }
