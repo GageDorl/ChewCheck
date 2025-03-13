@@ -1,5 +1,8 @@
 {
   "dependencies": {
     "vite": "^6.2.1"
+  },
+  "scripts":{
+    "start" : "cd ChewCheck && npm run start"
   }
 }
