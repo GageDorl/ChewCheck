@@ -45,6 +45,10 @@ header ul {
     text-align: center;
 }
 
+main {
+    text-align: center;
+}
+
 #search {
     display: flex;
     justify-content: center;
@@ -68,4 +72,53 @@ header ul {
 #searchInput {
     font-size: 1.1em;
     margin: 0px;
+}
+
+@media screen and (min-width: 700px) {
+    .buttons {
+        width: 70%;
+    }
+    #graph {
+        width: 70%;
+    }
+
+    header {
+        padding: 0px;
+        display: flex;
+        justify-items: space-between;
+    }
+
+    header h1 {
+        order: 2;
+        align-self: center;
+    }
+    
+    header li {
+        padding: 20px;
+    }
+
+    nav {
+        margin-left: 0px;
+        
+    }
+    header ul {
+        order: 1;
+        display: flex;
+        justify-content: left;
+    }
+
+    #search {
+        order: 3;
+        justify-self: last baseline;
+        text-align: right;
+        margin-right: 10px;
+    }
+    
+}
+
+@media screen and (min-width: 1100px) {
+    .buttons {
+        flex-direction: row;
+        width: 70%;
+    }
 }
