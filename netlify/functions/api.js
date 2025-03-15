@@ -1,6 +1,5 @@
 const express = require("express");
 const serverless = require("serverless-http");
-const axios = require("axios");
 const cors = require("cors");
 require("dotenv").config();
 const request = require('request-promise-native');
