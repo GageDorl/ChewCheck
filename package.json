@@ -1,10 +1,15 @@
 {
   "dependencies": {
     "concurrently": "^9.1.2",
-    "dotenv": "^16.4.7",
     "nodemon": "^3.1.9",
     "request-promise-native": "^1.0.9",
-    "vite": "^6.2.1"
+    "vite": "^6.2.1",
+    "cors": "^2.8.5",
+    "crypto-js": "^4.2.0",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "request": "^2.88.2",
+    "serverless-http": "^3.2.0"
   },
   "scripts": {
     "start": "cd ChewCheck && npm run start",
