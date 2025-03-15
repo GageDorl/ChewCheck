@@ -9,8 +9,8 @@ app.use(cors());
 app.use(express.json());
 
 const FAT_SECRET_BASE_URL = 'https://platform.fatsecret.com/rest/server.api';
-const FAT_SECRET_CONSUMER_KEY = process.env.FAT_SECRET_CONSUMER_KEY;
-const FAT_SECRET_CONSUMER_SECRET = process.env.FAT_SECRET_CONSUMER_SECRET;
+const FAT_SECRET_CONSUMER_KEY = process.env.VITE_FAT_SECRET_CONSUMER_KEY;
+const FAT_SECRET_CONSUMER_SECRET = process.env.VITE_FAT_SECRET_CONSUMER_SECRET;
 
 if (!FAT_SECRET_CONSUMER_KEY || !FAT_SECRET_CONSUMER_SECRET) {
     console.log(process.env);
@@ -75,3 +75,7 @@ app.get('/api/data', async (req, res) => {
 });
 
 module.exports.handler = serverless(app);
+
+app.listen(9000, () => {
+    console.log("Server listening on port 9000");
+});
