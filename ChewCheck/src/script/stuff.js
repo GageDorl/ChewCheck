@@ -1,6 +1,6 @@
 async function apiCall(keyword) {
     try {
-        const res = await fetch(`http://localhost:5010/api/data?query=${keyword}`);
+        const res = await fetch(`/api/data?query=${keyword}`);
         const data = await res.json();
         console.log(data);
     } catch(error) {

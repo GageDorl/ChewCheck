@@ -1,5 +1,4 @@
 {
-  "type": "module",
   "name": "server",
   "version": "1.0.0",
   "main": "server.js",
@@ -16,6 +15,7 @@
     "crypto-js": "^4.2.0",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "serverless-http": "^3.2.0"
   }
 }
