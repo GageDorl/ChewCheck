@@ -1,19 +1,9 @@
 import Chart from 'chart.js/auto';
 import 'chartjs-adapter-date-fns';
-
-async function apiCall(keyword) {
-    try {
-        const res = await fetch(`https://chewcheck.tech/api/data?query=${keyword}`);
-        const data = await res.json();
-        console.log(data);
-    } catch(error) {
-        console.error("Error fetching food data:", error);
-    }
-}
-
 document.querySelector('#searchButton').addEventListener('click', ()=>{
     const keyword = document.querySelector('#searchInput').value;
-    apiCall(keyword);
+    keyword.replace(' ', '%20');
+    location.assign(`search.html?keyword=${keyword}`);
 });
 
 const data = {

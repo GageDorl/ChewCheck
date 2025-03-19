@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChewCheck</title>
+    <script type="module" src="src/scripts/search.js" defer></script>
+    <link rel="stylesheet" href="src/stylesheets/search.css">
+</head>
+<body>
+    <header>
+        <h1>ChewCheck</h1>
+        <search id="search">
+          <button id="searchButton"><img src="src/images/search.svg" alt="Search"></button>
+          <input type="text" placeholder="Search..."  id="searchInput"/>
+        </search>
+        <nav>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#">Logs</a></li>
+            <li><a href="#">Daily</a></li>
+          </ul>
+        </nav>
+      </header>
+      <main>
+        <span class="loading">Loading...</span>
+        <ul id="searchResults"></ul>
+      </main>
+    
+</body>
+</html>

@@ -1,27 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Bungee+Inline&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
-
-
-* {
-    margin: 0 auto;
-    font-family: "Open Sans", sans-serif;
-}
-
-a {
-    text-decoration: none;
-    color: black;
-    line-height: 1.5em;
-}
-
-a:hover {
-    color: #1C3520;
-    text-decoration: underline;
-}
-
-.buttons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+@import 'header.css';
+@import 'global.css';
 
 .buttons button {
     width: 85%;
@@ -47,101 +25,13 @@ a:hover {
    border-radius: 5px;
 }
 
-header {
-    text-align: center;
-    background-color: #87C08F;
-    padding: 5%;
-}
-
-header h1 {
-    font-family: "Bungee Inline", sans-serif;
-    color: #1C3520;
-}
-
-header ul {
-    padding: 0;
-    list-style: none;
-    font-size: 1.25em;
-    text-align: center;
-}
-
-main {
-    text-align: center;
-}
-
-#search {
-    display: flex;
-    justify-content: center;
-    margin-top: 15px;
-    margin-bottom: 15px;
-}
-
-#searchButton {
-    border: none;
-    background-color: transparent;
-    margin: 0px;
-    padding-left: 0px;
-    padding-right: 10px;
-}
-
-#searchButton img {
-    width: 25px;
-    padding: 0px;
-    color: #2B4F31;
-}
-
-#searchButton img:hover {
-    background-color: #C9E3CD;
-    border-radius: 5px;
-}
-
-#searchInput {
-    font-size: 1.1em;
-    margin: 0px;
-    border: none;
-    border-radius: 5px;
-}
-
 @media screen and (min-width: 700px) {
     .buttons {
         width: 70%;
     }
     #graph {
         width: 70%;
-    }
-
-    header {
-        padding: 0px;
-        display: flex;
-        justify-items: space-between;
-    }
-
-    header h1 {
-        order: 2;
-        align-self: center;
-    }
-    
-    header li {
-        padding: 20px;
-    }
-
-    nav {
-        margin-left: 0px;
-        
-    }
-    header ul {
-        order: 1;
-        display: flex;
-        justify-content: left;
-    }
-
-    #search {
-        order: 3;
-        justify-self: last baseline;
-        text-align: right;
-        margin-right: 10px;
-    }
-    
+    }    
 }
 
 @media screen and (min-width: 1100px) {
