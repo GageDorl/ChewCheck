@@ -25,14 +25,20 @@ const onLoad = data => {
         foodItem.setAttribute('id', food.food_id);
         const foodMacros = food.food_description.split(' - ')[1].split(' | ');
         foodItem.innerHTML = `
-            <h3>Name: ${food.food_name}</h3>
-            <h4>Brand: ${food.brand_name}</h4>
+            <div class="foodTitle">
+            <h3 class="foodName">Name: ${food.food_name}</h3>
+            <h3 class="foodBrand">Brand: ${food.brand_name?food.brand_name:'Generic'}</h3>
+            </div>
             `;
+        const macros = document.createElement('div');
+        macros.classList.add('macros');
         foodMacros.map(macro => {
             const macroItem = document.createElement('p');
             macroItem.innerHTML = macro;
-            foodItem.appendChild(macroItem);
+            macroItem.classList.add('macroItem');
+            macros.appendChild(macroItem);
         });
+        foodItem.appendChild(macros);
         const addButton = document.createElement('button');
         addButton.innerHTML = 'Add to Log';
         addButton.classList.add('addButton');

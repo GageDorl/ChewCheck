@@ -25,3 +25,10 @@ a:hover {
 main {
     text-align: center;
 }
+ .pageTitle{
+    box-sizing: border-box;
+    font-size: 2em;
+    padding-top: 20px;
+    margin-bottom: 5px;
+    color: #1C3520;
+ }
