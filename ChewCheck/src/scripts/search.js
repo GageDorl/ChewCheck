@@ -23,6 +23,7 @@ const onLoad = data => {
         const foodItem = document.createElement('div');
         foodItem.classList.add('foodItem');
         foodItem.setAttribute('id', food.food_id);
+        const servingSize = food.food_description.split(' - ')[0];
         const foodMacros = food.food_description.split(' - ')[1].split(' | ');
         foodItem.innerHTML = `
             <div class="foodTitle">
@@ -32,6 +33,7 @@ const onLoad = data => {
             `;
         const macros = document.createElement('div');
         macros.classList.add('macros');
+        macros.innerHTML = (`<p class="servingSize">${servingSize}</p>`);
         foodMacros.map(macro => {
             const macroItem = document.createElement('p');
             macroItem.innerHTML = macro;

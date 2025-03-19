@@ -80,12 +80,14 @@ const data = {
     ]
 };
 
-const graphSection = document.querySelector('#graphSection').getContext('2d');
-new Chart(graphSection, {
+const graph = document.querySelector('#graph').getContext('2d');
+
+new Chart(graph, {
     type: 'line',
     data: data,
     options: {
         responsive: true,
+        maintainAspectRatio: false,
         scales: {
             x: {
                 type: 'time',
@@ -94,14 +96,30 @@ new Chart(graphSection, {
                 },
                 title: {
                     display: true,
-                    text: 'Date'
+                    text: 'Date',
+                    font: {
+                        size: responsiveFontSize() // ✅ Dynamic font size
+                    }
+                },
+                ticks: {
+                    font: {
+                        size: responsiveFontSize() // ✅ Adjust tick labels
+                    }
                 }
             },
             y1: {
                 position: 'right',
                 title: {
                     display: true,
-                    text: 'Calories'
+                    text: 'Calories',
+                    font: {
+                        size: responsiveFontSize()
+                    }
+                },
+                ticks: {
+                    font: {
+                        size: responsiveFontSize()
+                    }
                 },
                 grid: {
                     display: false
@@ -111,7 +129,15 @@ new Chart(graphSection, {
                 position: 'right',
                 title: {
                     display: true,
-                    text: 'Weight (lbs)'
+                    text: 'Weight (lbs)',
+                    font: {
+                        size: responsiveFontSize()
+                    }
+                },
+                ticks: {
+                    font: {
+                        size: responsiveFontSize()
+                    }
                 },
                 grid: {
                     display: false
@@ -121,14 +147,36 @@ new Chart(graphSection, {
                 position: 'right',
                 title: {
                     display: true,
-                    text: 'Macros (g)'
+                    text: 'Macros (g)',
+                    font: {
+                        size: responsiveFontSize()
+                    }
+                },
+                ticks: {
+                    font: {
+                        size: responsiveFontSize()
+                    }
                 }
             }
         },
         plugins: {
             legend: {
-                display: 'true'
+                display: true,
+                labels: {
+                    font: {
+                        size: responsiveFontSize()
+                    }
+                }
             }
         }
     }
 });
+
+function responsiveFontSize() {
+    const screenWidth = window.innerWidth;
+
+    if (screenWidth > 1200) return 16;  // Large screens
+    if (screenWidth > 800) return 14;   // Medium screens
+    if (screenWidth > 600) return 12;   // Small screens
+    return 8; // Mobile devices
+}

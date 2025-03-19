@@ -1,18 +1,19 @@
 @import 'header.css';
 @import 'global.css';
+@import 'variables.css';
 
 .addButton{
     width: 85%;
     padding: 15px;
     font-size: 1.25em;
-    background-color: #2B4F31;
+    background-color: var(--secondary-color);
     color: white;
     border: none;
     border-radius: 5px;
 }
 
 .addButton:active{
-    background-color: #1C3520;
+    background-color: var(--dark-text);
 }
 
 .foodItem{
@@ -24,7 +25,7 @@
     padding: 20px;
     border-radius: 5px;
     max-width: 500px;
-    background-color: #87C08F;
+    background-color: var(--primary-color);
     box-sizing: border-box;
     font-size: 1.1em;
 }
@@ -33,7 +34,7 @@
     font-size: 1.3em;
     margin: 0;
     padding: 0;
-    color: #1C3520;
+    color: var(--dark-text);
 }
 
 .macros{
@@ -43,10 +44,10 @@
     margin: 10px auto;
     padding: 20px;
     border-radius: 5px;
-    background-color: #C9E3CD;
+    background-color: var(--accent-color);
     width: 50%;
     aspect-ratio: 4.5/1;
-    color: #1C3520;
+    color: var(--dark-text);
 }
 
 #searchResults{

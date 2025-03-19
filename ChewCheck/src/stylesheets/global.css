@@ -12,7 +12,7 @@ a {
 }
 
 a:hover {
-    color: #1C3520;
+    color: var(--dark-text);
     text-decoration: underline;
 }
 
@@ -30,5 +30,5 @@ main {
     font-size: 2em;
     padding-top: 20px;
     margin-bottom: 5px;
-    color: #1C3520;
+    color: var(--dark-text);
  }

@@ -1,12 +1,12 @@
 header {
     text-align: center;
-    background-color: #87C08F;
+    background-color: var(--primary-color);
     padding: 5%;
 }
 
 header h1 {
     font-family: "Bungee Inline", sans-serif;
-    color: #1C3520;
+    color: var(--dark-text);
 }
 
 header ul {
@@ -34,11 +34,11 @@ header ul {
 #searchButton img {
     width: 25px;
     padding: 0px;
-    color: #2B4F31;
+    color: var(--secondary-color);
 }
 
 #searchButton img:hover {
-    background-color: #C9E3CD;
+    background-color: var(--accent-color);
     border-radius: 5px;
 }
 
