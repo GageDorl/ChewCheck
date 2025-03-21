@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ChewCheck</title>
-    <link rel="stylesheet" href="src/stylesheets/style.css">
+    <link rel="stylesheet" href="src/stylesheets/main.css">
     <script type="module" src="src/scripts/main.js" defer></script>
     <script src="https://kit.fontawesome.com/8e6d9d8d81.js" crossorigin="anonymous"></script>
   </head>
@@ -18,7 +18,20 @@
         </canvas>
       </div>
       <section id="homeLog">
-        
+        <h1>Daily Log</h1>
+        <section id="macroCounts">
+          <h2>Today's Macros:</h2>
+          <ul id="macroList">
+            <li>Calories: <span id="calories">0</span></li>
+            <li>Protein: <span id="protein">0</span></li>
+            <li>Carbs: <span id="carbs">0</span></li>
+            <li>Fat: <span id="fat">0</span></li>
+          </ul>
+        </section>
+        <section id="foodLog">
+          <h2>Today's Food:</h2>
+          <ul id="foodList">
+          </ul>
       </section>
     </main>
     <footer>

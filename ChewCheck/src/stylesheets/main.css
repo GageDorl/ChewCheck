@@ -1,0 +1,69 @@
+@import 'header.css';
+@import 'global.css';
+@import 'variables.css';
+@import 'footer.css';
+
+canvas{
+    width: 100% !important;
+    height:auto !important;
+    display: block;
+    background-color: var(--light-text);
+}
+
+#foodLog{
+    background-color: var(--accent-color);
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: 10px;
+    margin: 10px;
+    height: 200px;
+    overflow-y: auto;
+}
+
+#homeLog{
+    background-color: var(--primary-color);
+    color: var(--dark-text);
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+#graphSection {
+    width: 90%;
+    max-width: 800px;
+    aspect-ratio: 16/9;
+    border: var(--dark-text) solid 3px;
+    border-radius: 5px;
+    margin: 20px auto;
+    position: relative;
+}
+
+#macroCounts{
+    background-color: var(--accent-color);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+}
+
+#macroList{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    list-style: none;
+    padding:0;
+}
+
+@media screen and (min-width: 700px) {
+    .buttons {
+        width: 70%;
+    }
+    #graph {
+        width: 70%;
+    }    
+}
+
+@media screen and (min-width: 1100px) {
+    .buttons {
+        flex-direction: row;
+        width: 70%;
+    }
+}

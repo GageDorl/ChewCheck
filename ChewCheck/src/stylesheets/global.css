@@ -3,6 +3,8 @@
 * {
     margin: 0 auto;
     font-family: "Open Sans", sans-serif;
+    scrollbar-width: thin;
+    scrollbar-color: var(--dark-text) var(--light-text);
 }
 
 a {
@@ -17,8 +19,6 @@ a:hover {
 }
 
 body{
-    /* display: grid; */
-    /* grid-template-rows: 10% 80% 10%; */
     height:auto;
 }
 
@@ -43,14 +43,14 @@ header{
 
 main {
     text-align: center;
-    /* height:80vh; */
-    overflow-y: scroll;
+    background-color: var(--accent-color);
+    overflow-y: auto;
     position:relative;
     top:0;
-    /* grid-row:2/3; */
     width:100%;
     max-width: 520px;
-    max-height: calc(100vh - 160px);
+    height: calc(100vh - 160px);
+    padding:10px;
 }
  .pageTitle{
     box-sizing: border-box;
