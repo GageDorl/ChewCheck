@@ -16,6 +16,11 @@ a:hover {
     text-decoration: underline;
 }
 
+body{
+    display: grid;
+    grid-template-rows: 10vh 80vh 10vh;
+}
+
 .buttons {
     display: flex;
     flex-direction: column;
@@ -24,6 +29,11 @@ a:hover {
 
 main {
     text-align: center;
+    height:80vh;
+    overflow-y: scroll;
+    grid-row:2/3;
+    width:100%;
+    max-width: 520px;
 }
  .pageTitle{
     box-sizing: border-box;

@@ -1,10 +1,6 @@
 import Chart from 'chart.js/auto';
 import 'chartjs-adapter-date-fns';
-document.querySelector('#searchButton').addEventListener('click', ()=>{
-    const keyword = document.querySelector('#searchInput').value;
-    keyword.replace(' ', '%20');
-    location.assign(`search.html?keyword=${keyword}`);
-});
+import { setFooter } from './footer.mjs';
 
 const data = {
     labels: [Date.now()-1000*60*60*24*6, Date.now()-1000*60*60*24*5, Date.now()-1000*60*60*24*4, Date.now()-1000*60*60*24*3, Date.now()-1000*60*60*24*2, Date.now()-1000*60*60*24*1, Date.now()],
@@ -180,3 +176,5 @@ function responsiveFontSize() {
     if (screenWidth > 600) return 12;   // Small screens
     return 8; // Mobile devices
 }
+
+setFooter();

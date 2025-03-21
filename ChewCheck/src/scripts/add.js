@@ -1,14 +1,26 @@
+import { setFooter } from "./footer.mjs";
+
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const keyword = urlParams.get('keyword');
 const searchArea = document.querySelector('#searchResults');
+const loading = document.querySelector('.loading');
 
 async function apiCall(keyword) {
     try {
         const res = await fetch(`https://chewcheck.tech/api/data?query=${keyword}`);
         const data = await res.json();
         const foodItems = await data.foods.food;
-        onLoad(foodItems)
+        if(keyword){
+            console.log(keyword)
+            onLoad(foodItems)
+            document.querySelector('#searchInput').value = keyword;
+        }
+        else {
+            loading.style.display = 'none';
+            searchArea.classList.add('show');
+            searchArea.innerHTML = `<h2>Please search for a product</h2>`;
+        }
         
     } catch(error) {
         console.error("Error fetching food data:", error);
@@ -16,7 +28,6 @@ async function apiCall(keyword) {
 }
 
 const onLoad = data => {
-    const loading = document.querySelector('.loading');
     loading.style.display = 'none';
     data.map(food => {
         console.log(food);
@@ -123,5 +134,12 @@ const onLoad = data => {
     addFoodForm.addEventListener('submit', addFoodEntry);
 }
 
-apiCall(keyword);
+document.querySelector('#searchForm').addEventListener('submit', (event) => {
+    event.preventDefault();
+    location.href = `add.html?keyword=${document.querySelector('#searchInput').value}`;
+    keyword = document.querySelector('#searchInput').value;
+    apiCall(keyword);
+});
 
+apiCall(keyword);
+setFooter();

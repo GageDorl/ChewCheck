@@ -1,6 +1,7 @@
 @import 'header.css';
 @import 'global.css';
 @import 'variables.css';
+@import 'footer.css';
 
 .addButton{
     width: 85%;
@@ -125,4 +126,26 @@ ul {
     padding: 0;
     overflow: hidden;
     border-radius: 5px;
+}
+
+#searchButton{
+    background-color: var(--secondary-color);
+    color: white;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+}
+
+#searchForm {
+    margin: 10px;
+    border: 1px solid var(--accent-color);
+    border-radius: 10px;
+    
+}
+
+#searchInput {
+    width: 80%;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
 }
