@@ -47,6 +47,12 @@ const onLoad = data => {
         foodItem.appendChild(addButton);
         searchArea.appendChild(foodItem);
     })
+    searchArea.classList.add('show');
+    document.querySelectorAll('.foodItem').forEach(item => {
+        setTimeout(() => {
+            item.classList.add('show');
+        }, 100);
+    });
 }
 
 apiCall(keyword);
