@@ -47,6 +47,75 @@ const onLoad = data => {
         foodItem.appendChild(addButton);
         searchArea.appendChild(foodItem);
     })
+
+    const addFoodModal = document.querySelector('#addFoodModal');
+    const addButtons = document.querySelectorAll('.addButton');
+    const closeModalButton = document.querySelector('.close-button');
+
+    // function modalTemplate(event) { // Add foodId as parameter??
+    //     const foodSection = event.target.parentNode;
+    //     const foodName = foodSection.querySelector('.foodName');
+    //     const foodBrand = foodSection.querySelector('.foodBrand');
+    //     const foodInfo = foodSection.querySelector('.macros');
+
+    //     return `
+    //     <div id='modal-food-info'>
+    //     ${foodName}${foodBrand}${foodInfo}
+    //     </div>
+    //     `
+    // }
+    
+    function displayModal(event) {
+        addFoodModal.classList.add('open');
+        addFoodModal.setAttribute('aria-hidden', 'false');
+
+        const foodSection = event.target.parentNode;
+        const foodName = foodSection.querySelector('.foodName').innerHTML;
+        const foodBrand = foodSection.querySelector('.foodBrand').innerHTML;
+        const foodInfo = foodSection.querySelector('.macros').innerHTML;
+
+        document.querySelector('#modal-food-name').innerHTML = `${foodName}`
+        document.querySelector('#modal-food-brand').innerHTML = `${foodBrand}`
+        document.querySelector('#modal-food-info').innerHTML = `${foodInfo}`
+
+        // const foodDiv = event.target.parentNode;
+        // const foodId = foodDiv.id;
+        // console.log(foodId);
+
+
+    }
+
+    function closeModal() {
+        addFoodModal.classList.remove('open');
+        addFoodModal.setAttribute('aria-hidden', 'true');
+    }
+    
+    addButtons.forEach(button => {
+    button.addEventListener('click', displayModal);
+    });
+
+    closeModalButton.addEventListener('click', closeModal);
+
+    window.addEventListener('click', (event) => {
+        if (event.target === addFoodModal) {
+            closeModal();
+        }
+    })
+
+    window.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+            closeModal();
+        }
+    })
+
+    function addFoodEntry(event) {
+        event.preventDefault();
+        console.log('food entry form submission');
+    }
+
+    const addFoodForm = document.querySelector('#add-food-form');
+    addFoodForm.addEventListener('submit', addFoodEntry);
 }
 
 apiCall(keyword);
+

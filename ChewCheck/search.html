@@ -27,6 +27,19 @@
         <span class="loading">Loading...</span>
         <ul id="searchResults"></ul>
       </main>
-    
+    <div id="addFoodModal" class="addFoodModal" arial-modal="true" aria-hidden="true">
+      <section class="addFoodModal-content">
+        <span class="close-button" aria-label="Close modal">&times;</span>
+        <h2 id="modal-food-name"></h2>
+        <h3 id="modal-food-brand"></h3>
+        <p id="modal-food-info"></p>
+        <form action="submit" id="add-food-form">
+          <p><label for="add-servings">Servings </label><input name="add-servings" id="add-servings" type="text" placeholder="# of Servings"></p>
+          <p><label for="add-input-date">Date </label><input name="add-input-date" id="add-input-date" type="date" placeholder="Date"></p>
+          <p><label for="add-time">Time </label><input name="add-time" id="add-time" type="time" placeholder="Time"></p>
+          <button id="add-food-form-button">Add</button>
+        </form>
+      </section>
+    </div>
 </body>
 </html>
