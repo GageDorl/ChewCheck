@@ -136,7 +136,7 @@ const onLoad = data => {
 
 document.querySelector('#searchForm').addEventListener('submit', (event) => {
     event.preventDefault();
-    location.href = `add.html?keyword=${document.querySelector('#searchInput').value}`;
+    location.href = `add?keyword=${document.querySelector('#searchInput').value}`;
     keyword = document.querySelector('#searchInput').value;
     apiCall(keyword);
 });
