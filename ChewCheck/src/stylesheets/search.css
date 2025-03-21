@@ -16,6 +16,51 @@
     background-color: var(--dark-text);
 }
 
+#add-food-form {
+    line-height: 3em;
+    padding: 10%;
+    text-align: center;
+}
+
+#add-food-form-button {
+    background-color: var(--dark-text);
+    color: white;
+    font-size: 1.2em;
+    padding: 10px 30px;
+    border-radius: 10px;
+    border: none;
+    margin: 10% 30% 0 30%;;
+}
+
+.addFoodModal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: none;
+}
+
+.addFoodModal-content{
+    background-color: var(--accent-color);
+    margin: 10%;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.close-button {
+    float: right;
+    font-size: 3em;
+    color: var(--dark-text);
+}
+
+.close-button:hover, .close-button:focus {
+    color: var(--secondary-color);
+    cursor: pointer;
+}
+
 .foodItem{
     display: flex;
     flex-direction: column;
@@ -54,6 +99,10 @@
     width: 50%;
     aspect-ratio: 4.5/1;
     color: var(--dark-text);
+}
+
+.open {
+    display: block;
 }
 
 #searchResults{
