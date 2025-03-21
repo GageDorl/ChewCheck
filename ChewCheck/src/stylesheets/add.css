@@ -46,9 +46,12 @@
 
 .addFoodModal-content{
     background-color: var(--accent-color);
-    margin: 10%;
-    padding: 10px;
+    margin: 10% auto;
+    padding: 30px;
     border-radius: 10px;
+    width:90%;
+    max-width: 520px;
+    box-sizing: border-box;
 }
 
 .close-button {

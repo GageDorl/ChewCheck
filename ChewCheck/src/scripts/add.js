@@ -5,6 +5,7 @@ const urlParams = new URLSearchParams(queryString);
 const keyword = urlParams.get('keyword');
 const searchArea = document.querySelector('#searchResults');
 const loading = document.querySelector('.loading');
+keyword ? document.querySelector('#searchInput').value = keyword:'';
 
 async function apiCall(keyword) {
     try {
@@ -14,7 +15,6 @@ async function apiCall(keyword) {
         if(keyword){
             console.log(keyword)
             onLoad(foodItems)
-            document.querySelector('#searchInput').value = keyword;
         }
         else {
             loading.style.display = 'none';
