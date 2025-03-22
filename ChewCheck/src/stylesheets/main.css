@@ -14,6 +14,20 @@ canvas{
     font-weight: 800;
 }
 
+.entry{
+    display:grid;
+    grid-template-columns:2fr repeat(5, 1fr);
+    grid-gap: 1px;
+    background-color: white;
+}
+
+.entry span{
+    border: 1px solid var(--dark-text);
+    display:inline-block;
+    width:100%;
+    overflow:hidden;
+}
+
 #foodList{
     list-style: none;
     padding: 0;
@@ -26,20 +40,6 @@ canvas{
     padding: 10px;
     margin: 5px;
     cursor: pointer;
-}
-
-#foodList li{
-    display:grid;
-    grid-template-columns:2fr repeat(5, 1fr);
-    grid-gap: 1px;
-    background-color: white;
-}
-
-#foodList li span{
-    border: 1px solid var(--dark-text);
-    display:inline-block;
-    width:100%;
-    overflow:hidden;
 }
 
 

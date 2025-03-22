@@ -210,7 +210,7 @@ const setTodaysLog = () => {
     let proteinCount = 0;
     let carbsCount = 0;
     let fatCount = 0;
-    let foodListHTML = '<li id="columnHeaders"><span>Food</span><span>Serv</span><span>Cals</span><span>Prot</span><span>Carb</span><span>Fat</span></li>';
+    let foodListHTML = '<li id="columnHeaders" class="entry"><span>Food</span><span>Serv</span><span>Cals</span><span>Prot</span><span>Carb</span><span>Fat</span></li>';
     console.log(entries);
 
     const sorted = entries.sort((a,b) => a.time.localeCompare(b.time));
@@ -220,7 +220,7 @@ const setTodaysLog = () => {
         proteinCount+=entry.macros.protein*entry.servings;
         carbsCount+=entry.macros.carbs*entry.servings;
         fatCount+=entry.macros.fat*entry.servings;
-        foodListHTML += `<li><span>${entry.foodName}</span> <span>${entry.servings}</span><span>${entry.macros.calories * entry.servings}</span><span>${entry.macros.protein * entry.servings}</span><span>${entry.macros.carbs * entry.servings}</span><span>${entry.macros.fat * entry.servings}</span></li>`;
+        foodListHTML += `<li  class="entry"><span>${entry.foodName}</span> <span>${entry.servings}</span><span>${entry.macros.calories * entry.servings}</span><span>${entry.macros.protein * entry.servings}</span><span>${entry.macros.carbs * entry.servings}</span><span>${entry.macros.fat * entry.servings}</span></li>`;
     }
     caloriesSpan.textContent = calorieCount;
     proteinSpan.textContent = proteinCount;
