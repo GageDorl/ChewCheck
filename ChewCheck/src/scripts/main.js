@@ -1,6 +1,7 @@
 import Chart from 'chart.js/auto';
 import 'chartjs-adapter-date-fns';
 import { setFooter } from './footer.mjs';
+import e from 'cors';
 
 const data = {
     labels: [Date.now()-1000*60*60*24*6, Date.now()-1000*60*60*24*5, Date.now()-1000*60*60*24*4, Date.now()-1000*60*60*24*3, Date.now()-1000*60*60*24*2, Date.now()-1000*60*60*24*1, Date.now()],
@@ -177,4 +178,50 @@ function responsiveFontSize() {
     return 8; // Mobile devices
 }
 
+const setTodaysLog = () => {
+    const date = new Date(Date.now());
+    const caloriesSpan = document.querySelector('#calories');
+    const proteinSpan = document.querySelector('#protein');
+    const carbsSpan = document.querySelector('#carbs');
+    const fatSpan = document.querySelector('#fat');
+    const foodList = document.querySelector('#foodList');
+    const entries = JSON.parse(localStorage.getItem(date.toISOString().split('T')[0]));
+
+    if (entries == null) {
+        caloriesSpan.textContent = 0;
+        proteinSpan.textContent = 0;
+        carbsSpan.textContent = 0;
+        fatSpan.textContent = 0;
+        foodList.innerHTML = `
+        <li>
+            No food added today<br>
+            <a href="add"><button>Add Food</button></a>
+        </li>`;
+        return;
+    }
+    let calorieCount = 0;
+    let proteinCount = 0;
+    let carbsCount = 0;
+    let fatCount = 0;
+    let foodListHTML = '<li id="columnHeaders"><span>Food</span><span>Serv</span><span>Cals</span><span>Prot</span><span>Carb</span><span>Fat</span></li>';
+    console.log(entries);
+
+    const sorted = entries.sort((a,b) => a.time.localeCompare(b.time));
+    console.log(sorted);
+    for (let entry of sorted) {
+        calorieCount+=entry.macros.calories*entry.servings;
+        proteinCount+=entry.macros.protein*entry.servings;
+        carbsCount+=entry.macros.carbs*entry.servings;
+        fatCount+=entry.macros.fat*entry.servings;
+        foodListHTML += `<li><span>${entry.foodName}</span> <span>${entry.servings}</span><span>${entry.macros.calories * entry.servings}</span><span>${entry.macros.protein * entry.servings}</span><span>${entry.macros.carbs * entry.servings}</span><span>${entry.macros.fat * entry.servings}</span></li>`;
+    }
+    caloriesSpan.textContent = calorieCount;
+    proteinSpan.textContent = proteinCount;
+    carbsSpan.textContent = carbsCount;
+    fatSpan.textContent = fatCount;
+    foodList.innerHTML = foodListHTML;
+
+}
+
+setTodaysLog();
 setFooter();

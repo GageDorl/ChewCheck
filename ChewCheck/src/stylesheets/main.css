@@ -10,6 +10,39 @@ canvas{
     background-color: var(--light-text);
 }
 
+#columnHeaders{
+    font-weight: 800;
+}
+
+#foodList{
+    list-style: none;
+    padding: 0;
+}
+
+#foodList button{
+    background-color: var(--secondary-color);
+    color: var(--light-text);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+#foodList li{
+    display:grid;
+    grid-template-columns:2fr repeat(5, 1fr);
+    grid-gap: 1px;
+    background-color: white;
+}
+
+#foodList li span{
+    border: 1px solid var(--dark-text);
+    display:inline-block;
+    width:100%;
+    overflow:hidden;
+}
+
+
 #foodLog{
     background-color: var(--accent-color);
     border-radius: 10px;

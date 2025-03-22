@@ -51,6 +51,7 @@ main {
     max-width: 520px;
     height: calc(100vh - 160px);
     padding:10px;
+    box-sizing: border-box;
 }
  .pageTitle{
     box-sizing: border-box;

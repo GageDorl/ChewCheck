@@ -151,19 +151,20 @@ const onLoad = data => {
 
         if (entries == null) {
             console.log('entries was null');
-            entries = {};
+            entries = [];
         }
 
         const entry = {
             "time": time,
             "foodName": foodName.split(": ")[1],
             "foodBrand": foodBrand.split(": ")[1],
+            "servings": serving,
             "macros": macros
         }
 
-        entries[date] = entries + entry;
+        entries.push(entry);
 
-        setLocalStorage(date, entry);
+        setLocalStorage(date, entries);
         // console.log(getLocalStorage(date));
     }
 
