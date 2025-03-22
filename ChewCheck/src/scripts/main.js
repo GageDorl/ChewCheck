@@ -3,74 +3,81 @@ import 'chartjs-adapter-date-fns';
 import { setFooter } from './footer.mjs';
 import e from 'cors';
 
+
+
+const lastSevenDays = [];
+for (let i = 6; i >= 0; i--) {
+    const date = new Date(Date.now()-1000*60*60*24*i);
+    let day = date.toISOString().split('T')[0]
+    lastSevenDays.push(day);
+}
+console.log(lastSevenDays);
+
+const weekData = [];
+for (let date in lastSevenDays) {
+    const entries = JSON.parse(localStorage.getItem(lastSevenDays[date]));
+    console.log(date, entries);
+    if (entries == null) {
+        continue;
+    }
+    let calorieCount = 0;
+    let proteinCount = 0;
+    let carbsCount = 0;
+    let fatCount = 0;
+    for (let entry of entries) {
+        calorieCount+=entry.macros.calories*entry.servings;
+        proteinCount+=entry.macros.protein*entry.servings;
+        carbsCount+=entry.macros.carbs*entry.servings;
+        fatCount+=entry.macros.fat*entry.servings;
+    }
+    weekData.push({date: lastSevenDays[date], calories: calorieCount, protein: proteinCount, carbs: carbsCount, fat: fatCount});
+}
+
+console.log(weekData);
+
+const calorieData = [];
+const proteinData = [];
+const carbsData = [];
+const fatData = [];
+const weightData = [];
+for (let day of weekData) {
+    calorieData.push({x: day.date, y: day.calories});
+    proteinData.push({x: day.date, y: day.protein});
+    carbsData.push({x: day.date, y: day.carbs});
+    fatData.push({x: day.date, y: day.fat});
+}
+console.log(calorieData);
+
 const data = {
-    labels: [Date.now()-1000*60*60*24*6, Date.now()-1000*60*60*24*5, Date.now()-1000*60*60*24*4, Date.now()-1000*60*60*24*3, Date.now()-1000*60*60*24*2, Date.now()-1000*60*60*24*1, Date.now()],
+    labels: lastSevenDays,
     datasets: [
         {
             label: 'Calories',
-            data: [
-                {x: Date.now()-1000*60*60*24*6, y: 2000},
-                {x: Date.now()-1000*60*60*24*5, y: 1800},
-                {x: Date.now()-1000*60*60*24*4, y: 2200},
-                {x: Date.now()-1000*60*60*24*3, y: 1900},
-                {x: Date.now()-1000*60*60*24*2, y: 2100},
-                {x: Date.now()-1000*60*60*24*1, y: 2300},
-                {x: Date.now(), y: 2400}
-            ],
+            data: calorieData,
             borderColor: 'rgba(255, 99, 132, 1)',
             yAxisID: 'y1',
         },
         {
             label: 'Weight (lbs)',
-            data: [
-                {x: Date.now()-1000*60*60*24*6, y: 150},
-                {x: Date.now()-1000*60*60*24*5, y: 149},
-                {x: Date.now()-1000*60*60*24*3, y: 150},
-                {x: Date.now()-1000*60*60*24*1, y: 153},
-                {x: Date.now(), y: 154}
-            ],
+            data: weightData,
             borderColor: 'rgba(54, 162, 235, 1)',
             yAxisID: 'y2'
         },
         {
             label: 'Protein (g)',
-            data: [
-                {x: Date.now()-1000*60*60*24*6, y: 150},
-                {x: Date.now()-1000*60*60*24*5, y: 149},
-                {x: Date.now()-1000*60*60*24*4, y: 150},
-                {x: Date.now()-1000*60*60*24*3, y: 150},
-                {x: Date.now()-1000*60*60*24*2, y: 153},
-                {x: Date.now()-1000*60*60*24*1, y: 153},
-                {x: Date.now(), y: 154}
-            ],
+            data: proteinData,
             borderColor: 'rgba(75, 192, 192, 1)',
             yAxisID: 'y3',
         },
         {
             label: 'Carbs (g)',
-            data: [
-                {x: Date.now()-1000*60*60*24*6, y: 230},
-                {x: Date.now()-1000*60*60*24*5, y: 226},
-                {x: Date.now()-1000*60*60*24*4, y: 235},
-                {x: Date.now()-1000*60*60*24*3, y: 210},
-                {x: Date.now()-1000*60*60*24*2, y: 250},
-                {x: Date.now()-1000*60*60*24*1, y: 230},
-                {x: Date.now(), y: 240}
-            ],
+            data: carbsData,
             borderColor: 'rgba(255, 206, 86, 1)',
             yAxisID: 'y3',
         },
         {
             label: 'Fat (g)',
-            data: [
-                {x: Date.now()-1000*60*60*24*6, y: 110},
-                {x: Date.now()-1000*60*60*24*5, y: 120},
-                {x: Date.now()-1000*60*60*24*4, y: 100},
-                {x: Date.now()-1000*60*60*24*3, y: 110},
-                {x: Date.now()-1000*60*60*24*2, y: 120},
-                {x: Date.now()-1000*60*60*24*1, y: 100},
-                {x: Date.now(), y: 104}
-            ],
+            data: fatData,
             borderColor: 'rgba(153, 102, 255, 1)',
             yAxisID: 'y3',
         }
