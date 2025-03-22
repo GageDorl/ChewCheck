@@ -27,6 +27,14 @@ async function apiCall(keyword) {
     }
 }
 
+function setLocalStorage(key, data) {
+    localStorage.setItem(key, JSON.stringify(data));
+}
+  
+function getLocalStorage(key) {
+    return JSON.parse(localStorage.getItem(key));
+}
+
 const onLoad = data => {
     loading.style.display = 'none';
     data.map(food => {
@@ -69,18 +77,6 @@ const onLoad = data => {
     const addButtons = document.querySelectorAll('.addButton');
     const closeModalButton = document.querySelector('.close-button');
 
-    // function modalTemplate(event) { // Add foodId as parameter??
-    //     const foodSection = event.target.parentNode;
-    //     const foodName = foodSection.querySelector('.foodName');
-    //     const foodBrand = foodSection.querySelector('.foodBrand');
-    //     const foodInfo = foodSection.querySelector('.macros');
-
-    //     return `
-    //     <div id='modal-food-info'>
-    //     ${foodName}${foodBrand}${foodInfo}
-    //     </div>
-    //     `
-    // }
     
     function displayModal(event) {
         addFoodModal.classList.add('open');
@@ -128,6 +124,65 @@ const onLoad = data => {
     function addFoodEntry(event) {
         event.preventDefault();
         console.log('food entry form submission');
+        closeModal();
+
+        const foodSection = event.target.parentNode;
+        console.log(foodSection);
+        const serving = foodSection.querySelector('#add-servings').value;
+        const date = foodSection.querySelector('#add-input-date').value;
+        const time = foodSection.querySelector('#add-time').value;
+        const foodName = foodSection.querySelector('#modal-food-name').textContent;
+        const foodBrand = foodSection.querySelector('#modal-food-brand').textContent;
+        const foodInfo = foodSection.querySelectorAll('.macroItem');
+        let allMacros = '';
+        // console.log(foodSection);
+        // console.log(foodName);
+        // console.log(foodInfo);
+
+        foodInfo.forEach(macro => allMacros += macro.textContent);
+
+        const macros = getMacros(allMacros);
+
+        // console.log(macros);
+
+        let entries = getLocalStorage(date);
+
+        // console.log(getLocalStorage(date))
+
+        if (entries == null) {
+            console.log('entries was null');
+            entries = {};
+        }
+
+        const entry = {
+            "time": time,
+            "foodName": foodName.split(": ")[1],
+            "foodBrand": foodBrand.split(": ")[1],
+            "macros": macros
+        }
+
+        entries[date] = entries + entry;
+
+        setLocalStorage(date, entry);
+        // console.log(getLocalStorage(date));
+    }
+
+    function getMacros(foodInfo) {
+        const calories = parseFloat(foodInfo.match(/Calories:\s([\d.]+)kcal/)?.[1] || 0);
+        const fat = parseFloat(foodInfo.match(/Fat:\s([\d.]+)g/)?.[1] || 0);
+        const carbs = parseFloat(foodInfo.match(/Carbs:\s([\d.]+)g/)?.[1] || 0);
+        const protein = parseFloat(foodInfo.match(/Protein:\s([\d.]+)g/)?.[1] || 0);
+
+        // console.log(protein);
+
+        const macros = {
+            "calories": calories,
+            "fat": fat,
+            "carbs": carbs,
+            "protein": protein
+            }
+        return macros
+    
     }
 
     const addFoodForm = document.querySelector('#add-food-form');
