@@ -135,9 +135,6 @@ const onLoad = data => {
         const foodBrand = foodSection.querySelector('#modal-food-brand').textContent;
         const foodInfo = foodSection.querySelectorAll('.macroItem');
         let allMacros = '';
-        // console.log(foodSection);
-        // console.log(foodName);
-        // console.log(foodInfo);
 
         foodInfo.forEach(macro => allMacros += macro.textContent);
 

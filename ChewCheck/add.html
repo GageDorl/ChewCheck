@@ -13,6 +13,10 @@
       <h1>ChewCheck</h1>
     </header>
     <main>
+      <nav class="add-nav">
+        <button id="nav-food-button">Food</button>
+        <button id="nav-weight-button">Weight</button>
+      </nav>
       <form id="searchForm">
         <button id="searchButton"><i class="fa fa-search"></i></button>
         <input type="text" id="searchInput" placeholder="Search for a food">
@@ -28,8 +32,8 @@
         <h3 id="modal-food-brand"></h3>
         <p id="modal-food-info"></p>
         <form action="submit" id="add-food-form">
-          <p><label for="add-servings">Servings </label><input name="add-servings" id="add-servings" type="text" placeholder="# of Servings"></p>
-          <p><label for="add-input-date">Date </label><input name="add-input-date" id="add-input-date" type="date" placeholder="Date"></p>
+          <p><label for="add-servings">Servings </label><input name="add-servings" id="add-servings" type="int" value="1" placeholder="# of servings"></p>
+          <p><label for="add-input-date">Date </label><input name="add-input-date" id="add-input-date" type="date" placeholder="Date" value=""></p>
           <p><label for="add-time">Time </label><input name="add-time" id="add-time" type="time" placeholder="Time"></p>
           <button id="add-food-form-button">Add</button>
         </form>
