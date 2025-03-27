@@ -20,6 +20,7 @@ a:hover {
 
 body{
     height:auto;
+    background-color: var(--dark-text);
 }
 
 .buttons {
@@ -43,7 +44,7 @@ header{
 
 main {
     text-align: center;
-    background-color: var(--accent-color);
+    background-color: var(--light-text);
     overflow-y: auto;
     position:relative;
     top:0;

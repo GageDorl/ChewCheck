@@ -1,6 +1,7 @@
 footer{
     background-color: var(--secondary-color);
     width:100%;
+    box-sizing: border-box;
 }
 footer i{
     color: var(--accent-color);
@@ -15,6 +16,7 @@ footer .navItem{
     text-align:center;
     height:100%;
     align-content: center;
+    aspect-ratio: 1/1;
 }
 
 footer .navItem.active{
@@ -30,7 +32,7 @@ footer nav ul{
     height:100%;
     display:flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     padding:0;
     list-style: none;
