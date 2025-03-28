@@ -187,6 +187,28 @@ const onLoad = data => {
     addFoodForm.addEventListener('submit', addFoodEntry);
 }
 
+// function toggleView() {
+//     document.querySelector("#add-food-page").classList.toggle("hide");
+//     document.querySelector("#add-weight-page").classList.toggle("hide");
+
+//     // document.querySelector("#nav-food-button").classList.toggle("nav-color");
+//     // document.querySelector("#nav-weight-button").classList.toggle("nav-color");
+// }
+
+function displayAddFood() {
+    document.querySelector("#add-weight-page").classList.add("hide");
+    document.querySelector("#add-food-page").classList.remove("hide");
+}
+
+function displayAddWeight() {
+    document.querySelector("#add-food-page").classList.add("hide");
+    document.querySelector("#add-weight-page").classList.remove("hide");
+}
+
+document.querySelector("#nav-food-button").addEventListener("click", displayAddFood);
+
+document.querySelector("#nav-weight-button").addEventListener("click", displayAddWeight);
+
 document.querySelector('#searchForm').addEventListener('submit', (event) => {
     event.preventDefault();
     location.href = `add?keyword=${document.querySelector('#searchInput').value}`;

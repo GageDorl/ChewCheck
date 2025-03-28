@@ -14,9 +14,10 @@
     </header>
     <main>
       <nav class="add-nav">
-        <button id="nav-food-button">Food</button>
+        <button id="nav-food-button" class="nav-button-color">Food</button>
         <button id="nav-weight-button">Weight</button>
       </nav>
+      <section id="add-food-page">
       <form id="searchForm">
         <button id="searchButton"><i class="fa fa-search"></i></button>
         <input type="text" id="searchInput" placeholder="Search for a food">
@@ -24,6 +25,17 @@
       <h2 class="pageTitle">Search Results</h2>
       <span class="loading">Loading...</span>
       <ul id="searchResults"></ul>
+      </section>
+      <section id="add-weight-page" class="hide">
+        <h2 class="pageTitle">Add Weight</h2>
+        <form action="submit" id="addWeightForm">
+          <p><label for="weightDate">Date </label>
+          <input type="date" id="weightDate"></p>
+          <p><label for="weightInput">Weight </label>
+          <input type="int" id="weightInput" placeholder="weight (in lbs)"></p>
+          <button id="submitWeight">Add Weight</button>
+        </form>
+      </section>
     </main>
     <div id="addFoodModal" class="addFoodModal" arial-modal="true" aria-hidden="true">
       <section class="addFoodModal-content">

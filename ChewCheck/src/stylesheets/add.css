@@ -83,9 +83,37 @@
     height: 50px;
 }
 
+.add-nav button {
+    background-color: var(--primary-color);
+}
+
+#addWeightForm {
+    background-color: var(--primary-color);
+    padding: 20px;
+    display: block;
+    width: 60%;
+    border-radius: 10px;
+    margin-top: 35px;
+}
+
+#addWeightForm button {
+    margin-top: 10px;
+}
+
+#addWeightForm input {
+    width: 100px;
+    text-align: right;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+#addWeightform p {
+    padding: 20px;
+}
+
 #nav-food-button {
     flex: 1;
-    background-color: var(--light-text);
+    /* background-color: var(--primary-color); */
     border-radius: 10px 10px 0 0;
     border: none;
     color: var(--dark-text);
@@ -95,7 +123,7 @@
 
 #nav-weight-button {
     flex: 1;
-    background-color: var(--primary-color);
+    /* background-color: var(--primary-color); */
     border-radius: 10px 10px 0 0;
     border: none;
     color: var(--dark-text);
@@ -172,9 +200,6 @@
     display: grid;
     grid-template-columns: 50% 50%;
     grid-template-rows: 1fr 1fr 1fr;
-    /* background-color: var(--primary-color); */
-    /* justify-items: start; */
-    /* justify-content: start; */
 }
 
 #modal-food-info .servingSize {
@@ -206,6 +231,10 @@
 #modal-food-info .macroItem:nth-of-type(5) {
     grid-column: 2;
     grid-row: 2;
+}
+
+.nav-button-color {
+    background-color: var(--accent-color);
 }
 
 .open {
@@ -250,7 +279,6 @@ ul {
     margin: 10px;
     /* border: 1px solid var(--accent-color); */
     border-radius: 10px;
-    
 }
 
 #searchInput {
@@ -261,4 +289,8 @@ ul {
     background-color: var(--accent-color);
     color: var(--dark-text);
     margin-top: 35px;
+}
+
+.hide {
+    display: none;
 }
