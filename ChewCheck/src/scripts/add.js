@@ -142,13 +142,14 @@ const onLoad = data => {
 
         // console.log(macros);
 
-        let entries = getLocalStorage(date);
+
+        let data = getLocalStorage(date);
 
         // console.log(getLocalStorage(date))
 
-        if (entries == null) {
+        if (data == null) {
             console.log('entries was null');
-            entries = [];
+            data = {foodEntries: [], weight: null};
         }
 
         const entry = {
@@ -159,9 +160,11 @@ const onLoad = data => {
             "macros": macros
         }
 
-        entries.push(entry);
+        console.log(data);
 
-        setLocalStorage(date, entries);
+        data.foodEntries.push(entry);
+
+        setLocalStorage(date, data);
         // console.log(getLocalStorage(date));
     }
 
@@ -187,14 +190,6 @@ const onLoad = data => {
     addFoodForm.addEventListener('submit', addFoodEntry);
 }
 
-// function toggleView() {
-//     document.querySelector("#add-food-page").classList.toggle("hide");
-//     document.querySelector("#add-weight-page").classList.toggle("hide");
-
-//     // document.querySelector("#nav-food-button").classList.toggle("nav-color");
-//     // document.querySelector("#nav-weight-button").classList.toggle("nav-color");
-// }
-
 function displayAddFood() {
     document.querySelector("#add-weight-page").classList.add("hide");
     document.querySelector("#add-food-page").classList.remove("hide");
@@ -215,6 +210,27 @@ document.querySelector('#searchForm').addEventListener('submit', (event) => {
     keyword = document.querySelector('#searchInput').value;
     apiCall(keyword);
 });
+
+function addWeight(event) {
+    event.preventDefault();
+    const weightDate = document.querySelector("#weightDate").value;
+    const weightInput = document.querySelector("#weightInput").value;
+
+    let data = getLocalStorage(weightDate);
+
+    if (data == null) {
+        data = {foodEntries: [], weight: null};
+    }
+
+    console.log(data)
+    data.weight = weightInput;
+    console.log(data);
+    console.log(data.macros);
+
+    setLocalStorage(weightDate, data);
+}
+
+document.querySelector("#addWeightForm").addEventListener("submit", addWeight);
 
 apiCall(keyword);
 setFooter();
