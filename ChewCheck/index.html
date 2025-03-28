@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ChewCheck</title>
+    <title>ChewCheck - Home</title>
     <link rel="stylesheet" href="src/stylesheets/main.css">
     <script type="module" src="src/scripts/main.js" defer></script>
     <script src="https://kit.fontawesome.com/8e6d9d8d81.js" crossorigin="anonymous"></script>
@@ -13,14 +13,20 @@
       <h1>ChewCheck</h1>
     </header>
     <main>
-      <div id="graphSection">
-        <canvas id="graph">
-        </canvas>
+      <div id="graphHolder">
+        <button id="prevDayGraphButton" type="button"><i class="fa fa-arrow-left"></i></button>
+        <div id="graphSection">
+          <canvas id="graph">
+          </canvas>
+        </div>
+        <button id="nextDayGraphButton" type="button"><i class="fa fa-arrow-right"></i></button>
       </div>
       <section id="homeLog">
+        <button id="prevDayLogButton" type="button"><i class="fa fa-arrow-left"></i></button>
         <h1>Daily Log</h1>
+        <button id="nextDayLogButton" type="button"><i class="fa fa-arrow-right"></i></button>
         <section id="macroCounts">
-          <h2>Today's Macros:</h2>
+          <h2 id="macroTitle">Today's Macros:</h2>
           <ul id="macroList">
             <li>Calories: <span id="calories">0</span></li>
             <li>Protein: <span id="protein">0</span></li>
@@ -32,6 +38,8 @@
           <h2>Today's Food:</h2>
           <ul id="foodList">
           </ul>
+        </section>
+        
       </section>
     </main>
     <footer>

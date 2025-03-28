@@ -86,6 +86,7 @@
 #nav-food-button {
     flex: 1;
     background-color: var(--light-text);
+    border-radius: 10px 10px 0 0;
     border: none;
     color: var(--dark-text);
     font-size: 1.2em;
@@ -95,6 +96,7 @@
 #nav-weight-button {
     flex: 1;
     background-color: var(--primary-color);
+    border-radius: 10px 10px 0 0;
     border: none;
     color: var(--dark-text);
     font-size: 1.2em;

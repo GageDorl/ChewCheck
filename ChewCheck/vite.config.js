@@ -7,7 +7,7 @@ export default defineConfig({
             input: {
                 main: './index.html',
                 add: './add.html',
-                // calendar: './calendar.html'
+                calendar: './calendar.html'
             }
         }
     }

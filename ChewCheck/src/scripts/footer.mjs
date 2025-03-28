@@ -5,7 +5,7 @@ export const setFooter = () => {
         <ul>
           <li class="navItem"><a href="./"><i class="fa fa-home"></i></a></li>
           <li class="navItem"><a href="add"><i class="fa fa-plus"></i></a></li>
-          <li class="navItem"><a href="#"><i class="fa fa-calendar-days"></i></a></li>
+          <li class="navItem"><a href="calendar"><i class="fa fa-calendar-days"></i></a></li>
         </ul>
       </nav>`;
       const path = window.location.pathname;
