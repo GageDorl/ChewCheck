@@ -38,7 +38,7 @@ canvas{
     border-radius: 10px;
     box-sizing: border-box;
     padding: 10px;
-    margin: 10px;
+    margin: 5px;
     height: 200px;
     overflow-y: auto;
     grid-column: 1/4;
@@ -51,6 +51,11 @@ canvas{
     box-sizing: border-box;
     padding: 10px;
     display:grid;
+    align-items: center;
+}
+
+#homeLog button{
+    height:40px;
 }
 
 #homeLog h1{
@@ -58,7 +63,6 @@ canvas{
 }
 
 #graphHolder{
-    padding:10px;
     display: grid;
     grid-template-columns: 1fr 6fr 1fr;
     align-items: center;
@@ -70,7 +74,7 @@ canvas{
     aspect-ratio: 16/9;
     border: var(--dark-text) solid 3px;
     border-radius: 5px;
-    margin: 20px auto;
+    margin: 10px auto;
     position: relative;
 }
 
@@ -78,7 +82,7 @@ canvas{
     background-color: var(--accent-color);
     border-radius: 10px;
     padding: 10px;
-    margin: 10px;
+    margin: 5px;
     grid-column: 1/4;
 }
 

@@ -39,7 +39,11 @@ const setGraph = () => {
 
     const weekData = [];
     for (let date in lastSevenDays) {
-        const entries = JSON.parse(localStorage.getItem(lastSevenDays[date]));
+        let entries = null;
+        if (localStorage.getItem(lastSevenDays[date]) != null) {
+            entries = JSON.parse(localStorage.getItem(lastSevenDays[date])).foodEntries;
+        }
+        console.log(entries);
         if (entries == null) {
             continue;
         }
@@ -200,22 +204,25 @@ const setGraph = () => {
 function responsiveFontSize() {
     const screenWidth = window.innerWidth;
 
-    if (screenWidth > 1200) return 16;  // Large screens
-    if (screenWidth > 800) return 14;   // Medium screens
-    if (screenWidth > 600) return 12;   // Small screens
+    if (screenWidth > 1200) return 12;  // Large screens
+    if (screenWidth > 800) return 11;   // Medium screens
+    if (screenWidth > 600) return 10;   // Small screens
     return 8; // Mobile devices
 }
 
 const setDailyLog = () => {
     const date = new Date(logDate).toISOString().split('T')[0];
     const todaysDate = new Date(Date.now()).toISOString().split('T')[0];
-    console.log(date==todaysDate);
     const caloriesSpan = document.querySelector('#calories');
     const proteinSpan = document.querySelector('#protein');
     const carbsSpan = document.querySelector('#carbs');
     const fatSpan = document.querySelector('#fat');
     const foodList = document.querySelector('#foodList');
-    const entries = JSON.parse(localStorage.getItem(date));
+    let entries = null;
+    if (localStorage.getItem(date) != null) {
+        entries = JSON.parse((localStorage.getItem(date))).foodEntries;
+    }
+    
     
     if(date != todaysDate) {
         document.querySelector('#macroTitle').textContent = 'Macros on '+date;
