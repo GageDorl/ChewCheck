@@ -20,7 +20,7 @@
       <section id="add-food-page">
       <form id="searchForm">
         <button id="searchButton"><i class="fa fa-search"></i></button>
-        <input type="text" id="searchInput" placeholder="Search for a food">
+        <input type="text" id="searchInput" placeholder="Search for a food" required>
       </form>
       <h2 class="pageTitle">Search Results</h2>
       <span class="loading">Loading...</span>
@@ -30,9 +30,9 @@
         <h2 class="pageTitle">Add Weight</h2>
         <form action="submit" id="addWeightForm">
           <p><label for="weightDate">Date </label>
-          <input type="date" id="weightDate"></p>
+          <input type="date" id="weightDate" required></p>
           <p><label for="weightInput">Weight </label>
-          <input type="int" id="weightInput" placeholder="weight (in lbs)"></p>
+          <input type="int" id="weightInput" placeholder="weight (in lbs)" required></p>
           <button id="submitWeight">Add Weight</button>
         </form>
       </section>
@@ -50,9 +50,9 @@
         <h3 id="modal-food-brand"></h3>
         <p id="modal-food-info"></p>
         <form action="submit" id="add-food-form">
-          <p><label for="add-servings">Servings </label><input name="add-servings" id="add-servings" type="int" value="1" placeholder="# of servings"></p>
-          <p><label for="add-input-date">Date </label><input name="add-input-date" id="add-input-date" type="date" placeholder="Date" value=""></p>
-          <p><label for="add-time">Time </label><input name="add-time" id="add-time" type="time" placeholder="Time"></p>
+          <p><label for="add-servings">Servings </label><input name="add-servings" id="add-servings" type="int" value="1" placeholder="# of servings" required></p>
+          <p><label for="add-input-date">Date </label><input name="add-input-date" id="add-input-date" type="date" placeholder="Date" value="" required></p>
+          <p><label for="add-time">Time </label><input name="add-time" id="add-time" type="time" placeholder="Time" required></p>
           <button id="add-food-form-button">Add</button>
         </form>
       </section>

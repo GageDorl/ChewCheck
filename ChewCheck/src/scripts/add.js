@@ -82,6 +82,9 @@ const onLoad = data => {
         addFoodModal.classList.add('open');
         addFoodModal.setAttribute('aria-hidden', 'false');
 
+        setDefaultDate(document.querySelector("#add-input-date"));
+        setDefaultTime(document.querySelector("#add-time"));
+
         const foodSection = event.target.parentNode;
         const foodName = foodSection.querySelector('.foodName').innerHTML;
         const foodBrand = foodSection.querySelector('.foodBrand').innerHTML;
@@ -90,11 +93,6 @@ const onLoad = data => {
         document.querySelector('#modal-food-name').innerHTML = `${foodName}`
         document.querySelector('#modal-food-brand').innerHTML = `${foodBrand}`
         document.querySelector('#modal-food-info').innerHTML = `${foodInfo}`
-
-        // const foodDiv = event.target.parentNode;
-        // const foodId = foodDiv.id;
-        // console.log(foodId);
-
 
     }
 
@@ -165,7 +163,6 @@ const onLoad = data => {
         data.foodEntries.push(entry);
 
         setLocalStorage(date, data);
-        // console.log(getLocalStorage(date));
         showConfirmation();
     }
 
@@ -174,8 +171,6 @@ const onLoad = data => {
         const fat = parseFloat(foodInfo.match(/Fat:\s([\d.]+)g/)?.[1] || 0);
         const carbs = parseFloat(foodInfo.match(/Carbs:\s([\d.]+)g/)?.[1] || 0);
         const protein = parseFloat(foodInfo.match(/Protein:\s([\d.]+)g/)?.[1] || 0);
-
-        // console.log(protein);
 
         const macros = {
             "calories": calories,
@@ -244,5 +239,20 @@ function showConfirmation() {
     }, 1000);
 }
 
+function setDefaultDate(inputId) {
+    const today = new Date();
+    const difference = today.getTimezoneOffset();
+    const adjustedDate = new Date(today.getTime() - difference * 60000).toISOString().split("T")[0];
+    inputId.value = adjustedDate;
+}
+
+function setDefaultTime(inputId) {
+    const currentTime = new Date();
+    const hours = String(currentTime.getHours()).padStart(2, "0");
+    const minutes= String(currentTime.getMinutes()).padStart(2, "0");
+    inputId.value = `${hours}:${minutes}`;
+}
+
 apiCall(keyword);
 setFooter();
+setDefaultDate(document.querySelector("#weightDate"));
