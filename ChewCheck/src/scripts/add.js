@@ -27,11 +27,11 @@ async function apiCall(keyword) {
     }
 }
 
-function setLocalStorage(key, data) {
+export function setLocalStorage(key, data) {
     localStorage.setItem(key, JSON.stringify(data));
 }
   
-function getLocalStorage(key) {
+export function getLocalStorage(key) {
     return JSON.parse(localStorage.getItem(key));
 }
 

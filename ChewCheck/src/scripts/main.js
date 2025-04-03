@@ -1,7 +1,6 @@
 import Chart from 'chart.js/auto';
 import 'chartjs-adapter-date-fns';
 import { setFooter } from './footer.mjs';
-import e from 'cors';
 
 let graphDate = Date.now();
 let logDate = Date.now();
