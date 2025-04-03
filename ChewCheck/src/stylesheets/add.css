@@ -31,6 +31,12 @@
     min-width: 100px;
 }
 
+#add-food-form div {
+    max-width: 300px;
+    /* display: flex; */
+    margin: 0 auto;
+}
+
 #add-food-form div input {
     width: 50%;
     text-align: right;
@@ -40,6 +46,7 @@
 
 #add-food-form div label {
     width: 50%;
+    text-align: center;
     display: inline-block;
 }
 
@@ -55,7 +62,7 @@
     padding: 10px 30px;
     border-radius: 10px;
     border: none;
-    margin: 10% 30% 0 30%;
+    margin: 10px auto;
 }
 
 #add-food-form-button:hover {
