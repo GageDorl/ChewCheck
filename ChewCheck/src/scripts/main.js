@@ -2,6 +2,7 @@ import Chart from 'chart.js/auto';
 import 'chartjs-adapter-date-fns';
 import { setFooter } from './footer.mjs';
 import e from 'cors';
+import { showConfirmation, closeModal } from './modals.mjs';
 
 let graphDate = Date.now();
 let logDate = Date.now();
@@ -255,7 +256,13 @@ const setDailyLog = () => {
         proteinCount+=entry.macros.protein*entry.servings;
         carbsCount+=entry.macros.carbs*entry.servings;
         fatCount+=entry.macros.fat*entry.servings;
-        foodListHTML += `<li  class="entry"><span>${entry.foodName}</span> <span>${entry.servings}</span><span>${entry.macros.calories * entry.servings}</span><span>${entry.macros.protein * entry.servings}</span><span>${entry.macros.carbs * entry.servings}</span><span>${entry.macros.fat * entry.servings}</span></li>`;
+        foodListHTML += `<li  class="entry"><span>${entry.foodName}</span> <span>${entry.servings}</span><span>${entry.macros.calories * entry.servings}</span><span>${entry.macros.protein * entry.servings}</span><span>${entry.macros.carbs * entry.servings}</span><span>${entry.macros.fat * entry.servings}</span>
+        <div><button aria-label="Show dropdown" class="dropDownButton">...</button>
+        <ul class="dropDownMenu" class="hide">
+            <li><button class="editButton">Edit</button></li>
+            <li><button class="deleteButton">Delete</button></li>
+        </ul>
+        </div></li>`;
     }
     caloriesSpan.textContent = calorieCount;
     proteinSpan.textContent = proteinCount;
@@ -263,8 +270,44 @@ const setDailyLog = () => {
     fatSpan.textContent = fatCount;
     foodList.innerHTML = foodListHTML;
 
+
+document.querySelectorAll(".dropDownButton").forEach(button => {button.addEventListener("click", toggleDropDown)});
+
 }
 
 setGraph();
 setDailyLog();
 setFooter();
+
+function toggleDropDown(event) {
+    console.log("button working");
+    const dropDownMenu = event.currentTarget.nextElementSibling;
+    dropDownMenu.classList.toggle("hide");
+    // showConfirmation();
+}
+
+document.addEventListener("click", (event) => {
+    if (event.target.classList.contains("editButton") || event.target.classList.contains("deleteButton")) {
+        displayModal(event);
+    }
+})
+
+function displayModal(event) {
+    console.log('edit/delete buttons working');
+    const foodModal = document.querySelector(".foodModal");
+    foodModal.classList.add('open');
+    foodModal.setAttribute('aria-hidden', 'false');
+
+    // setDefaultDate(document.querySelector("#add-input-date"));
+    // setDefaultTime(document.querySelector("#add-time"));
+
+    // const foodSection = event.target.parentNode;
+    // const foodName = foodSection.querySelector('.foodName').innerHTML;
+    // const foodBrand = foodSection.querySelector('.foodBrand').innerHTML;
+    // const foodInfo = foodSection.querySelector('.macros').innerHTML;
+
+    // document.querySelector('#modal-food-name').innerHTML = `${foodName}`
+    // document.querySelector('#modal-food-brand').innerHTML = `${foodBrand}`
+    // document.querySelector('#modal-food-info').innerHTML = `${foodInfo}`
+
+}

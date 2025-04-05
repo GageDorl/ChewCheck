@@ -44,17 +44,17 @@
         </div>
       </div>
     </main>
-    <div id="addFoodModal" class="addFoodModal" arial-modal="true" aria-hidden="true">
+    <div id="addFoodModal" class="foodModal" arial-modal="true" aria-hidden="true">
       <section class="addFoodModal-content">
         <span class="close-button" aria-label="Close modal">&times;</span>
         <h2 id="modal-food-name"></h2>
         <h3 id="modal-food-brand"></h3>
         <div id="modal-food-info"></div>
-        <form action="submit" id="add-food-form">
-          <div><label for="add-servings">Servings </label><input name="add-servings" id="add-servings" type="int" value="1" placeholder="# of servings" required></div>
-          <div><label for="add-input-date">Date </label><input name="add-input-date" id="add-input-date" type="date" placeholder="Date" value="" required></div>
-          <div><label for="add-time">Time </label><input name="add-time" id="add-time" type="time" placeholder="Time" required></div>
-          <button id="add-food-form-button">Add</button>
+        <form action="submit" id="food-form">
+          <div><label for="servings">Servings </label><input name="servings" id="servings" type="int" value="1" placeholder="# of servings" required></div>
+          <div><label for="input-date">Date </label><input name="input-date" id="input-date" type="date" placeholder="Date" value="" required></div>
+          <div><label for="time">Time </label><input name="time" id="time" type="time" placeholder="Time" required></div>
+          <button id="food-form-button">Add</button>
         </form>
       </section>
     </div>
