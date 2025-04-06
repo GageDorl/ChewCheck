@@ -1,6 +1,8 @@
 import { setFooter } from "./footer.mjs";
 
 const calendarInput = document.querySelector('#calendarMonthYear');
+const prevMonth = document.querySelector('#prevMonthButton');
+const nextMonth = document.querySelector('#nextMonthButton');
 
 const setInitial = () => {
     calendarInput.value = new Date().toISOString().split('T')[0].slice(0,7);
@@ -56,7 +58,7 @@ const setCalendar = () => {
             const totalMacros = document.createElement('div');
             totalMacros.classList.add('totalMacros');
             totalMacros.innerHTML = `
-                <span class="totalCalories">Cals: ${totalCals} kcal</span>
+                <span class="totalCalories">Cals: ${totalCals}</span>
                 <span class="totalProtein">Prot: ${totalProtein} g</span>
                 <span class="totalCarbs">Carbs: ${totalCarbs} g</span>
                 <span class="totalFat">Fats: ${totalFat} g</span>
@@ -79,6 +81,22 @@ calendarInput.addEventListener('change', (e) => {
     calendarDays.innerHTML = '';
     setCalendar();
 });
+
+prevMonth.addEventListener('click', (e) => {
+    calendarInput.value = new Date(calendarInput.value.slice(0,4), calendarInput.value.slice(5,7)-2).toISOString().split('T')[0].slice(0,7);
+    const calendarDays = document.querySelector('#calendarDays');
+    calendarDays.innerHTML = '';
+    setCalendar();
+})
+
+nextMonth.addEventListener('click', (e) => {
+    calendarInput.value = new Date(calendarInput.value.slice(0,4), calendarInput.value.slice(5,7)).toISOString().split('T')[0].slice(0,7);
+    const calendarDays = document.querySelector('#calendarDays');
+    calendarDays.innerHTML = '';
+    setCalendar();
+});
+
+
 
 setInitial();
 setFooter();
