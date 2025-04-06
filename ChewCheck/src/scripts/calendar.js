@@ -25,18 +25,43 @@ const setCalendar = () => {
         let date =  new Date(calendarInput.value.slice(0,4), calendarInput.value.slice(5,7)-1, i);
         
         const summary = document.createElement('summary');
-        summary.innerText = date.toDateString();
         summary.classList.add('calendarSummary');
-        day.appendChild(summary);
+        summary.innerHTML = `
+            <span class="icon"><i class="fa-solid fa-caret-down"></i></span>
+            <span class="date">${date.toDateString()}</span>
+            `
+        
         if (localStorage.getItem(date.toISOString().split('T')[0]) != null) {
             day.classList.add('filledDay');
+            if(JSON.parse(localStorage.getItem(date.toISOString().split('T')[0])).weight){
+                const weight = JSON.parse(localStorage.getItem(date.toISOString().split('T')[0])).weight;
+                summary.innerHTML += `
+                    <span class="weight"> Weight: ${weight} lbs</span>
+                `
+            }
+            let totalCals = 0;
+            let totalProtein = 0;
+            let totalCarbs = 0;
+            let totalFat = 0;
             JSON.parse(localStorage.getItem(date.toISOString().split('T')[0])).foodEntries.forEach(entry => {
                 const foodEntry = document.createElement('div');
                 foodEntry.classList.add('foodEntry');
                 foodEntry.innerText = `${entry.foodName} - ${entry.servings} servings`;
                 day.appendChild(foodEntry);
-            }
-            );
+                totalCals += Math.round(entry.macros.calories * entry.servings);
+                totalProtein += Math.round(entry.macros.protein * entry.servings);
+                totalCarbs += Math.round(entry.macros.carbs * entry.servings);
+                totalFat += Math.round(entry.macros.fat * entry.servings);
+            });
+            const totalMacros = document.createElement('div');
+            totalMacros.classList.add('totalMacros');
+            totalMacros.innerHTML = `
+                <span class="totalCalories">Cals: ${totalCals} kcal</span>
+                <span class="totalProtein">Prot: ${totalProtein} g</span>
+                <span class="totalCarbs">Carbs: ${totalCarbs} g</span>
+                <span class="totalFat">Fats: ${totalFat} g</span>
+            `;
+            summary.innerHTML+= totalMacros.outerHTML;
         } else {
             day.classList.add('emptyDay');
             const emptyContent = document.createElement('div');
@@ -44,6 +69,7 @@ const setCalendar = () => {
             emptyContent.innerText = `No food on ${date.toISOString().split('T')[0]}`;
             day.appendChild(emptyContent);
         }
+        day.appendChild(summary);
         calendarDays.appendChild(day);
     }
 }
