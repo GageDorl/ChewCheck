@@ -19,9 +19,13 @@
     grid-column: 2/3;
 }
 
-.filledDay summary{
+summary{
     display:grid;
     grid-template-columns: 25px 1fr 1fr;
+}
+
+details[open]  .icon {
+    transform: rotate(180deg);
 }
 
 .filledDay summary>span{
@@ -33,6 +37,7 @@
 }
 
 .icon{
+    transition: .5s;
     grid-column: 1/2;
     grid-row:1/3;
     align-self: center;
