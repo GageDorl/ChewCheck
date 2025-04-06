@@ -287,27 +287,130 @@ function toggleDropDown(event) {
 }
 
 document.addEventListener("click", (event) => {
-    if (event.target.classList.contains("editButton") || event.target.classList.contains("deleteButton")) {
-        displayModal(event);
+    if (event.target.classList.contains("editButton")) {
+        displayModal(event, "Edit Log");
+        document.querySelector("#food-form-button").classList.add("isEditing");
+    } 
+    else if (event.target.classList.contains("deleteButton")) {
+        displayModal(event, "Delete from Log");
+        document.querySelector("#food-form-button").classList.add("isDeleting");
     }
 })
 
-function displayModal(event) {
+function setLocalStorage(key, data) {
+    localStorage.setItem(key, JSON.stringify(data));
+}
+  
+function getLocalStorage(key) {
+    return JSON.parse(localStorage.getItem(key));
+}
+
+function displayModal(event, buttonType) {
     console.log('edit/delete buttons working');
     const foodModal = document.querySelector(".foodModal");
     foodModal.classList.add('open');
     foodModal.setAttribute('aria-hidden', 'false');
 
-    // setDefaultDate(document.querySelector("#add-input-date"));
-    // setDefaultTime(document.querySelector("#add-time"));
+    document.querySelector("#food-form-button").textContent = buttonType;
 
-    // const foodSection = event.target.parentNode;
-    // const foodName = foodSection.querySelector('.foodName').innerHTML;
-    // const foodBrand = foodSection.querySelector('.foodBrand').innerHTML;
-    // const foodInfo = foodSection.querySelector('.macros').innerHTML;
+    const closeModalButton = document.querySelector('.close-button');
+    closeModalButton.addEventListener('click', () => closeModal(foodModal));
+    window.addEventListener('click', (event) => {
+        if (event.target === foodModal) {
+            closeModal(foodModal);
+        }
+    })
 
-    // document.querySelector('#modal-food-name').innerHTML = `${foodName}`
-    // document.querySelector('#modal-food-brand').innerHTML = `${foodBrand}`
-    // document.querySelector('#modal-food-info').innerHTML = `${foodInfo}`
+    const date = new Date(logDate).toISOString().split('T')[0];
 
+    const dataOnDay = getLocalStorage(date);
+    console.log(dataOnDay);
+    console.log(date);
+
+    const foodEntry = event.target.closest("li.entry");
+    const foodName = foodEntry.querySelector("span:nth-of-type(1)").textContent;
+    const servings = foodEntry.querySelector("span:nth-of-type(2)").textContent;
+
+    const localStorageEntry = dataOnDay.foodEntries.find(entry => entry.foodName === foodName && entry.servings == servings);
+    console.log(localStorageEntry);
+
+    document.querySelector("#input-date").value = date;
+
+    document.querySelector('#modal-food-name').innerHTML = `${foodName}`;
+    document.querySelector('#modal-food-brand').innerHTML = `${localStorageEntry.foodBrand}`;
+    document.querySelector("#servings").value = `${localStorageEntry.servings}`;
+    document.querySelector("#time").value = `${localStorageEntry.time}`;
+
+    // function addFoodEntry(event) {
+    //     event.preventDefault();
+    //     console.log('food entry form submission');
+    //     closeModal(addFoodModal);
+
+    //     const foodSection = event.target.parentNode;
+    //     console.log(foodSection);
+    //     const serving = foodSection.querySelector('#servings').value;
+    //     const date = foodSection.querySelector('#input-date').value;
+    //     const time = foodSection.querySelector('#time').value;
+    //     const foodName = foodSection.querySelector('#modal-food-name').textContent;
+    //     const foodBrand = foodSection.querySelector('#modal-food-brand').textContent;
+    //     const foodInfo = foodSection.querySelectorAll('.macroItem');
+    //     let allMacros = '';
+
+    //     foodInfo.forEach(macro => allMacros += macro.textContent);
+
+    //     const macros = getMacros(allMacros);
+
+    //     // console.log(macros);
+
+
+    //     let data = getLocalStorage(date);
+
+    //     // console.log(getLocalStorage(date))
+
+    //     if (data == null) {
+    //         console.log('entries was null');
+    //         data = {foodEntries: [], weight: null};
+    //     }
+
+    //     const entry = {
+    //         "time": time,
+    //         "foodName": foodName.split(": ")[1],
+    //         "foodBrand": foodBrand.split(": ")[1],
+    //         "servings": serving,
+    //         "macros": macros
+    //     }
+
+    //     console.log(data);
+
+    //     data.foodEntries.push(entry);
+
+    //     setLocalStorage(date, data);
+    //     showConfirmation();
+    // }
+
+    document.querySelector("#food-form").addEventListener("submit", editEntry);
+
+function editEntry(event) {
+    console.log('button works');
+    event.preventDefault();
+
+    if (document.querySelector("#food-form-button").classList.contains("isEditing")) {
+        localStorageEntry.servings = document.querySelector("#servings").value;
+        localStorageEntry.time = document.querySelector("#time").value;
+        setLocalStorage(date, dataOnDay);
+        closeModal(foodModal);
+        // location.reload();
+    }
+
+    else if (document.querySelector("#food-form-button").classList.contains("isDeleting")) {
+        console.log('deletebuttonworks');
+        const deleteIndex = dataOnDay.foodEntries.indexOf(localStorageEntry);
+        dataOnDay.foodEntries.splice(deleteIndex, 1);
+        setLocalStorage(date, dataOnDay);
+        closeModal(foodModal);
+        // location.reload();
+    }
+
+    showConfirmation();
+}
 }

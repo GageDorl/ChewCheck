@@ -8,7 +8,7 @@ export function showConfirmation() {
     }, 1000);
 }
 
-export function closeModal() {
-    addFoodModal.classList.remove('open');
-    addFoodModal.setAttribute('aria-hidden', 'true');
+export function closeModal(foodModal) {
+    foodModal.classList.remove('open');
+    foodModal.setAttribute('aria-hidden', 'true');
 }

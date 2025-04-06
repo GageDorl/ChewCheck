@@ -103,7 +103,7 @@ const onLoad = data => {
     button.addEventListener('click', displayModal);
     });
 
-    closeModalButton.addEventListener('click', closeModal);
+    closeModalButton.addEventListener('click', () => closeModal(addFoodModal));
 
     window.addEventListener('click', (event) => {
         if (event.target === addFoodModal) {
@@ -120,7 +120,7 @@ const onLoad = data => {
     function addFoodEntry(event) {
         event.preventDefault();
         console.log('food entry form submission');
-        closeModal();
+        closeModal(addFoodModal);
 
         const foodSection = event.target.parentNode;
         console.log(foodSection);
