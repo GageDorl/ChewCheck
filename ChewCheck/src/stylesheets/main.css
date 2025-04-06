@@ -2,6 +2,7 @@
 @import 'global.css';
 @import 'variables.css';
 @import 'footer.css';
+@import 'modals.css';
 
 canvas{
     width: 100% !important;
@@ -14,9 +15,17 @@ canvas{
     font-weight: 800;
 }
 
-.entry{
+.dropDownMenu {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+.entry {
     display:grid;
-    grid-template-columns:2fr repeat(5, 1fr);
+    grid-template-columns:2fr repeat(6, 1fr);
     grid-gap: 1px;
     background-color: white;
 }
@@ -42,6 +51,11 @@ canvas{
     height: 200px;
     overflow-y: auto;
     grid-column: 1/4;
+}
+
+.hide {
+    max-height: 0px;
+    overflow: hidden;
 }
 
 #homeLog{

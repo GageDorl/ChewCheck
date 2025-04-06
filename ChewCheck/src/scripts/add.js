@@ -1,4 +1,5 @@
 import { setFooter } from "./footer.mjs";
+import { showConfirmation, closeModal } from "./modals.mjs";
 
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
@@ -82,8 +83,8 @@ const onLoad = data => {
         addFoodModal.classList.add('open');
         addFoodModal.setAttribute('aria-hidden', 'false');
 
-        setDefaultDate(document.querySelector("#add-input-date"));
-        setDefaultTime(document.querySelector("#add-time"));
+        setDefaultDate(document.querySelector("#input-date"));
+        setDefaultTime(document.querySelector("#time"));
 
         const foodSection = event.target.parentNode;
         const foodName = foodSection.querySelector('.foodName').innerHTML;
@@ -96,16 +97,13 @@ const onLoad = data => {
 
     }
 
-    function closeModal() {
-        addFoodModal.classList.remove('open');
-        addFoodModal.setAttribute('aria-hidden', 'true');
-    }
+    
     
     addButtons.forEach(button => {
     button.addEventListener('click', displayModal);
     });
 
-    closeModalButton.addEventListener('click', closeModal);
+    closeModalButton.addEventListener('click', () => closeModal(addFoodModal));
 
     window.addEventListener('click', (event) => {
         if (event.target === addFoodModal) {
@@ -122,13 +120,13 @@ const onLoad = data => {
     function addFoodEntry(event) {
         event.preventDefault();
         console.log('food entry form submission');
-        closeModal();
+        closeModal(addFoodModal);
 
         const foodSection = event.target.parentNode;
         console.log(foodSection);
-        const serving = foodSection.querySelector('#add-servings').value;
-        const date = foodSection.querySelector('#add-input-date').value;
-        const time = foodSection.querySelector('#add-time').value;
+        const serving = foodSection.querySelector('#servings').value;
+        const date = foodSection.querySelector('#input-date').value;
+        const time = foodSection.querySelector('#time').value;
         const foodName = foodSection.querySelector('#modal-food-name').textContent;
         const foodBrand = foodSection.querySelector('#modal-food-brand').textContent;
         const foodInfo = foodSection.querySelectorAll('.macroItem');
@@ -182,7 +180,7 @@ const onLoad = data => {
     
     }
 
-    const addFoodForm = document.querySelector('#add-food-form');
+    const addFoodForm = document.querySelector('#food-form');
     addFoodForm.addEventListener('submit', addFoodEntry);
 }
 
@@ -212,6 +210,10 @@ function addWeight(event) {
     const weightDate = document.querySelector("#weightDate").value;
     const weightInput = document.querySelector("#weightInput").value;
 
+    if (weightInput < 1) {
+        // add code for the error message.
+    }
+
     let data = getLocalStorage(weightDate);
 
     if (data == null) {
@@ -228,16 +230,6 @@ function addWeight(event) {
 }
 
 document.querySelector("#addWeightForm").addEventListener("submit", addWeight);
-
-function showConfirmation() {
-    document.querySelector("#confirmation-content").classList.add("show");
-    document.querySelector("#confirmation-message").classList.add("show");
-
-    setTimeout(() => {
-        document.querySelector("#confirmation-content").classList.remove("show");
-        document.querySelector("#confirmation-message").classList.remove("show");
-    }, 1000);
-}
 
 function setDefaultDate(inputId) {
     const today = new Date();

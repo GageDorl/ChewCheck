@@ -1,6 +1,7 @@
 import Chart from 'chart.js/auto';
 import 'chartjs-adapter-date-fns';
 import { setFooter } from './footer.mjs';
+import { showConfirmation, closeModal } from './modals.mjs';
 
 let graphDate = Date.now();
 let logDate = Date.now();
@@ -254,7 +255,13 @@ const setDailyLog = () => {
         proteinCount+=entry.macros.protein*entry.servings;
         carbsCount+=entry.macros.carbs*entry.servings;
         fatCount+=entry.macros.fat*entry.servings;
-        foodListHTML += `<li  class="entry"><span>${entry.foodName}</span> <span>${entry.servings}</span><span>${entry.macros.calories * entry.servings}</span><span>${entry.macros.protein * entry.servings}</span><span>${entry.macros.carbs * entry.servings}</span><span>${entry.macros.fat * entry.servings}</span></li>`;
+        foodListHTML += `<li  class="entry"><span>${entry.foodName}</span> <span>${entry.servings}</span><span>${entry.macros.calories * entry.servings}</span><span>${entry.macros.protein * entry.servings}</span><span>${entry.macros.carbs * entry.servings}</span><span>${entry.macros.fat * entry.servings}</span>
+        <div><button aria-label="Show dropdown" class="dropDownButton">...</button>
+        <ul class="dropDownMenu" class="hide">
+            <li><button class="editButton">Edit</button></li>
+            <li><button class="deleteButton">Delete</button></li>
+        </ul>
+        </div></li>`;
     }
     caloriesSpan.textContent = calorieCount;
     proteinSpan.textContent = proteinCount;
@@ -262,8 +269,147 @@ const setDailyLog = () => {
     fatSpan.textContent = fatCount;
     foodList.innerHTML = foodListHTML;
 
+
+document.querySelectorAll(".dropDownButton").forEach(button => {button.addEventListener("click", toggleDropDown)});
+
 }
 
 setGraph();
 setDailyLog();
 setFooter();
+
+function toggleDropDown(event) {
+    console.log("button working");
+    const dropDownMenu = event.currentTarget.nextElementSibling;
+    dropDownMenu.classList.toggle("hide");
+    // showConfirmation();
+}
+
+document.addEventListener("click", (event) => {
+    if (event.target.classList.contains("editButton")) {
+        displayModal(event, "Edit Log");
+        document.querySelector("#food-form-button").classList.add("isEditing");
+    } 
+    else if (event.target.classList.contains("deleteButton")) {
+        displayModal(event, "Delete from Log");
+        document.querySelector("#food-form-button").classList.add("isDeleting");
+    }
+})
+
+function setLocalStorage(key, data) {
+    localStorage.setItem(key, JSON.stringify(data));
+}
+  
+function getLocalStorage(key) {
+    return JSON.parse(localStorage.getItem(key));
+}
+
+function displayModal(event, buttonType) {
+    console.log('edit/delete buttons working');
+    const foodModal = document.querySelector(".foodModal");
+    foodModal.classList.add('open');
+    foodModal.setAttribute('aria-hidden', 'false');
+
+    document.querySelector("#food-form-button").textContent = buttonType;
+
+    const closeModalButton = document.querySelector('.close-button');
+    closeModalButton.addEventListener('click', () => closeModal(foodModal));
+    window.addEventListener('click', (event) => {
+        if (event.target === foodModal) {
+            closeModal(foodModal);
+        }
+    })
+
+    const date = new Date(logDate).toISOString().split('T')[0];
+
+    const dataOnDay = getLocalStorage(date);
+    console.log(dataOnDay);
+    console.log(date);
+
+    const foodEntry = event.target.closest("li.entry");
+    const foodName = foodEntry.querySelector("span:nth-of-type(1)").textContent;
+    const servings = foodEntry.querySelector("span:nth-of-type(2)").textContent;
+
+    const localStorageEntry = dataOnDay.foodEntries.find(entry => entry.foodName === foodName && entry.servings == servings);
+    console.log(localStorageEntry);
+
+    document.querySelector("#input-date").value = date;
+
+    document.querySelector('#modal-food-name').innerHTML = `${foodName}`;
+    document.querySelector('#modal-food-brand').innerHTML = `${localStorageEntry.foodBrand}`;
+    document.querySelector("#servings").value = `${localStorageEntry.servings}`;
+    document.querySelector("#time").value = `${localStorageEntry.time}`;
+
+    // function addFoodEntry(event) {
+    //     event.preventDefault();
+    //     console.log('food entry form submission');
+    //     closeModal(addFoodModal);
+
+    //     const foodSection = event.target.parentNode;
+    //     console.log(foodSection);
+    //     const serving = foodSection.querySelector('#servings').value;
+    //     const date = foodSection.querySelector('#input-date').value;
+    //     const time = foodSection.querySelector('#time').value;
+    //     const foodName = foodSection.querySelector('#modal-food-name').textContent;
+    //     const foodBrand = foodSection.querySelector('#modal-food-brand').textContent;
+    //     const foodInfo = foodSection.querySelectorAll('.macroItem');
+    //     let allMacros = '';
+
+    //     foodInfo.forEach(macro => allMacros += macro.textContent);
+
+    //     const macros = getMacros(allMacros);
+
+    //     // console.log(macros);
+
+
+    //     let data = getLocalStorage(date);
+
+    //     // console.log(getLocalStorage(date))
+
+    //     if (data == null) {
+    //         console.log('entries was null');
+    //         data = {foodEntries: [], weight: null};
+    //     }
+
+    //     const entry = {
+    //         "time": time,
+    //         "foodName": foodName.split(": ")[1],
+    //         "foodBrand": foodBrand.split(": ")[1],
+    //         "servings": serving,
+    //         "macros": macros
+    //     }
+
+    //     console.log(data);
+
+    //     data.foodEntries.push(entry);
+
+    //     setLocalStorage(date, data);
+    //     showConfirmation();
+    // }
+
+    document.querySelector("#food-form").addEventListener("submit", editEntry);
+
+function editEntry(event) {
+    console.log('button works');
+    event.preventDefault();
+
+    if (document.querySelector("#food-form-button").classList.contains("isEditing")) {
+        localStorageEntry.servings = document.querySelector("#servings").value;
+        localStorageEntry.time = document.querySelector("#time").value;
+        setLocalStorage(date, dataOnDay);
+        closeModal(foodModal);
+        // location.reload();
+    }
+
+    else if (document.querySelector("#food-form-button").classList.contains("isDeleting")) {
+        console.log('deletebuttonworks');
+        const deleteIndex = dataOnDay.foodEntries.indexOf(localStorageEntry);
+        dataOnDay.foodEntries.splice(deleteIndex, 1);
+        setLocalStorage(date, dataOnDay);
+        closeModal(foodModal);
+        // location.reload();
+    }
+
+    showConfirmation();
+}
+}
