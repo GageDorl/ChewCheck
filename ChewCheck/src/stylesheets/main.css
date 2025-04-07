@@ -13,6 +13,7 @@ canvas{
 
 #columnHeaders{
     font-weight: 800;
+    background-color: var(--secondary-color);
 }
 
 .dropDownMenu {
@@ -35,6 +36,7 @@ canvas{
     display:inline-block;
     width:100%;
     overflow:hidden;
+    background-color: white;
 }
 
 #foodList{
