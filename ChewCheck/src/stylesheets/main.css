@@ -19,6 +19,11 @@ canvas{
 .dropDownButton {
     border-radius: 0px;
     margin: 0px;
+    height: 100%;
+}
+
+.dropDownButton.active {
+    max-height: 40px;
 }
 
 .dropDownMenu {
@@ -58,6 +63,7 @@ canvas{
     width:100%;
     overflow:hidden;
     background-color: white;
+    align-content: center;
 }
 
 #foodList{
@@ -91,7 +97,7 @@ canvas{
     align-items: center;
 }
 
-#homeLog button{
+#homeLog>button{
     height:40px;
 }
 
