@@ -357,7 +357,7 @@ function editEntry(event) {
         localStorageEntry.time = document.querySelector("#time").value;
         setLocalStorage(date, dataOnDay);
         closeModal(foodModal);
-        // location.reload();
+
         }
     }
 
@@ -372,10 +372,9 @@ function editEntry(event) {
         dataOnDay.foodEntries.splice(deleteIndex, 1);
         setLocalStorage(date, dataOnDay);
         closeModal(foodModal);
-        // location.reload();
         }
     }
-
+    setDailyLog();
     showConfirmation();
 }
 }
