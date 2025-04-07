@@ -2,6 +2,7 @@
 @import 'global.css';
 @import 'variables.css';
 @import 'footer.css';
+@import 'modals.css';
 
 .calendarDay{
     margin:20px;
@@ -28,12 +29,80 @@ details[open]  .icon {
     transform: rotate(180deg);
 }
 
+.dropDownButton {
+    border-radius: 0px;
+    margin: 0px;
+    height: 100%;
+}
+
+.dropDownButton.active {
+    max-height: 40px;
+}
+
+.dropDownMenu {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+    border-radius: 0px;
+}
+
+.editButton {
+    border-radius: 0px;
+    background-color: var(--accent-color);
+    color: var(--dark-text);
+    border: solid var(--dark-text);
+}
+
+.deleteButton {
+    background-color: var(--accent-color);
+    color: var(--dark-text);
+    border-bottom: solid var(--dark-text);
+    border-left: solid var(--dark-text);
+    border-right: solid var(--dark-text);
+}
+
+.hide {
+    max-height: 0px;
+    overflow: hidden;
+}
+
+
 .filledDay summary>span{
     display: inline-block;
     width: 100%;
     text-align: left;
     padding: 0 10px;
     box-sizing: border-box;
+}
+
+.foodEntry {
+    display:grid;
+    grid-template-columns:2fr repeat(5, 1fr);
+    grid-gap: 1px;
+    background-color: white;
+}
+
+.foodEntry span{
+    border: 1px solid var(--dark-text);
+    display:inline-block;
+    width:100%;
+    overflow:hidden;
+    background-color: white;
+    align-content: center;
+}
+.foodEntry > div {
+    max-width: 60px;
+    display: flex;
+    flex-direction: column;
+    /* margin: 0px; */
+}
+
+.foodEntry > div button {
+    border-radius: 0px;
+    margin: 0px;
+    width: 60px;
 }
 
 .icon{

@@ -223,7 +223,6 @@ const setDailyLog = () => {
         entries = JSON.parse((localStorage.getItem(date))).foodEntries;
     }
     
-    
     if(date != todaysDate) {
         document.querySelector('#macroTitle').textContent = 'Macros on '+date;
     } else {
@@ -263,14 +262,14 @@ const setDailyLog = () => {
         </ul>
         </div></li>`;
     }
-    caloriesSpan.textContent = calorieCount;
-    proteinSpan.textContent = proteinCount;
-    carbsSpan.textContent = carbsCount;
-    fatSpan.textContent = fatCount;
+    caloriesSpan.textContent = Math.round(calorieCount);
+    proteinSpan.textContent = Math.round(proteinCount);
+    carbsSpan.textContent = Math.round(carbsCount);
+    fatSpan.textContent = Math.round(fatCount);
     foodList.innerHTML = foodListHTML;
 
 
-document.querySelectorAll(".dropDownButton").forEach(button => {button.addEventListener("click", toggleDropDown)});
+    document.querySelectorAll(".dropDownButton").forEach(button => {button.addEventListener("click", toggleDropDown)});
 
 }
 
@@ -280,6 +279,7 @@ setFooter();
 
 function toggleDropDown(event) {
     console.log("button working");
+    event.currentTarget.classList.toggle("active");
     const dropDownMenu = event.currentTarget.nextElementSibling;
     dropDownMenu.classList.toggle("hide");
     // showConfirmation();
@@ -342,39 +342,39 @@ function displayModal(event, buttonType) {
 
     document.querySelector("#food-form").addEventListener("submit", editEntry);
 
-function editEntry(event) {
-    event.preventDefault();
+    function editEntry(event) {
+        event.preventDefault();
 
-    if (document.querySelector("#food-form-button").classList.contains("isEditing")) {
-        
-        if (document.querySelector("#servings").value <= 0) {
-            displayErrorMessage(document.querySelector(".errorMessage"), "Please input a positive number of servings.");
+        if (document.querySelector("#food-form-button").classList.contains("isEditing")) {
+            
+            if (document.querySelector("#servings").value <= 0) {
+                displayErrorMessage(document.querySelector(".errorMessage"), "Please input a positive number of servings.");
+            }
+
+            else {
+                document.querySelector(".errorMessage").classList.remove("display");
+            localStorageEntry.servings = document.querySelector("#servings").value;
+            localStorageEntry.time = document.querySelector("#time").value;
+            setLocalStorage(date, dataOnDay);
+            closeModal(foodModal);
+            // location.reload();
+            }
         }
-
-        else {
-            document.querySelector(".errorMessage").classList.remove("display");
-        localStorageEntry.servings = document.querySelector("#servings").value;
-        localStorageEntry.time = document.querySelector("#time").value;
-        setLocalStorage(date, dataOnDay);
-        closeModal(foodModal);
-
+    
+        else if (document.querySelector("#food-form-button").classList.contains("isDeleting")) {
+            
+            if (document.querySelector("#servings").value <= 0) {
+                displayErrorMessage(document.querySelector(".errorMessage"), "Please input a positive number of servings.");
+            }
+            else {
+                document.querySelector(".errorMessage").classList.remove("display");
+            const deleteIndex = dataOnDay.foodEntries.indexOf(localStorageEntry);
+            dataOnDay.foodEntries.splice(deleteIndex, 1);
+            setLocalStorage(date, dataOnDay);
+            closeModal(foodModal);
+            }
         }
+        setDailyLog();
+        showConfirmation();
     }
-
-    else if (document.querySelector("#food-form-button").classList.contains("isDeleting")) {
-        
-        if (document.querySelector("#servings").value <= 0) {
-            displayErrorMessage(document.querySelector(".errorMessage"), "Please input a positive number of servings.");
-        }
-        else {
-            document.querySelector(".errorMessage").classList.remove("display");
-        const deleteIndex = dataOnDay.foodEntries.indexOf(localStorageEntry);
-        dataOnDay.foodEntries.splice(deleteIndex, 1);
-        setLocalStorage(date, dataOnDay);
-        closeModal(foodModal);
-        }
-    }
-    setDailyLog();
-    showConfirmation();
-}
 }

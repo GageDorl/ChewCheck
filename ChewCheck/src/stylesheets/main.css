@@ -13,11 +13,17 @@ canvas{
 
 #columnHeaders{
     font-weight: 800;
+    background-color: var(--secondary-color);
 }
 
 .dropDownButton {
     border-radius: 0px;
     margin: 0px;
+    height: 100%;
+}
+
+.dropDownButton.active {
+    max-height: 40px;
 }
 
 .dropDownMenu {
@@ -56,6 +62,8 @@ canvas{
     display:inline-block;
     width:100%;
     overflow:hidden;
+    background-color: white;
+    align-content: center;
 }
 
 #foodList{
@@ -89,7 +97,7 @@ canvas{
     align-items: center;
 }
 
-#homeLog button{
+#homeLog>button{
     height:40px;
 }
 
