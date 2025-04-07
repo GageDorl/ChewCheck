@@ -1,5 +1,5 @@
 import { setFooter } from "./footer.mjs";
-import { showConfirmation, closeModal } from "./modals.mjs";
+import { showConfirmation, closeModal, displayErrorMessage } from "./modals.mjs";
 
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
@@ -119,29 +119,22 @@ const onLoad = data => {
 
     function addFoodEntry(event) {
         event.preventDefault();
-        console.log('food entry form submission');
-        closeModal(addFoodModal);
 
         const foodSection = event.target.parentNode;
-        console.log(foodSection);
         const serving = foodSection.querySelector('#servings').value;
         const date = foodSection.querySelector('#input-date').value;
         const time = foodSection.querySelector('#time').value;
         const foodName = foodSection.querySelector('#modal-food-name').textContent;
         const foodBrand = foodSection.querySelector('#modal-food-brand').textContent;
         const foodInfo = foodSection.querySelectorAll('.macroItem');
+
         let allMacros = '';
 
         foodInfo.forEach(macro => allMacros += macro.textContent);
 
         const macros = getMacros(allMacros);
 
-        // console.log(macros);
-
-
         let data = getLocalStorage(date);
-
-        // console.log(getLocalStorage(date))
 
         if (data == null) {
             console.log('entries was null');
@@ -158,11 +151,21 @@ const onLoad = data => {
 
         console.log(data);
 
+        if (serving <= 0) {   
+            displayErrorMessage(document.querySelector("#addFoodErrorMessage"), "Please input a positive number of servings.");
+        }
+
+        else {
+        
+        closeModal(addFoodModal);
+
         data.foodEntries.push(entry);
 
         setLocalStorage(date, data);
+        document.querySelector("#addFoodErrorMessage").classList.remove("display");
         showConfirmation();
     }
+}
 
     function getMacros(foodInfo) {
         const calories = parseFloat(foodInfo.match(/Calories:\s([\d.]+)kcal/)?.[1] || 0);
@@ -210,10 +213,13 @@ function addWeight(event) {
     const weightDate = document.querySelector("#weightDate").value;
     const weightInput = document.querySelector("#weightInput").value;
 
-    if (weightInput < 1) {
-        // add code for the error message.
+    if (weightInput <= 0) {
+        displayErrorMessage(document.querySelector(".errorMessage"), "Please input a positive weight value.");
     }
 
+    else {
+
+    document.querySelector(".errorMessage").classList.remove("display");
     let data = getLocalStorage(weightDate);
 
     if (data == null) {
@@ -227,6 +233,7 @@ function addWeight(event) {
 
     setLocalStorage(weightDate, data);
     showConfirmation();
+    }
 }
 
 document.querySelector("#addWeightForm").addEventListener("submit", addWeight);

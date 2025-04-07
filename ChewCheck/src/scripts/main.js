@@ -1,7 +1,7 @@
 import Chart from 'chart.js/auto';
 import 'chartjs-adapter-date-fns';
 import { setFooter } from './footer.mjs';
-import { showConfirmation, closeModal } from './modals.mjs';
+import { showConfirmation, closeModal, displayErrorMessage } from './modals.mjs';
 
 let graphDate = Date.now();
 let logDate = Date.now();
@@ -257,7 +257,7 @@ const setDailyLog = () => {
         fatCount+=entry.macros.fat*entry.servings;
         foodListHTML += `<li  class="entry"><span>${entry.foodName}</span> <span>${entry.servings}</span><span>${entry.macros.calories * entry.servings}</span><span>${entry.macros.protein * entry.servings}</span><span>${entry.macros.carbs * entry.servings}</span><span>${entry.macros.fat * entry.servings}</span>
         <div><button aria-label="Show dropdown" class="dropDownButton">...</button>
-        <ul class="dropDownMenu" class="hide">
+        <ul class="dropDownMenu hide">
             <li><button class="editButton">Edit</button></li>
             <li><button class="deleteButton">Delete</button></li>
         </ul>
@@ -340,74 +340,40 @@ function displayModal(event, buttonType) {
     document.querySelector("#servings").value = `${localStorageEntry.servings}`;
     document.querySelector("#time").value = `${localStorageEntry.time}`;
 
-    // function addFoodEntry(event) {
-    //     event.preventDefault();
-    //     console.log('food entry form submission');
-    //     closeModal(addFoodModal);
-
-    //     const foodSection = event.target.parentNode;
-    //     console.log(foodSection);
-    //     const serving = foodSection.querySelector('#servings').value;
-    //     const date = foodSection.querySelector('#input-date').value;
-    //     const time = foodSection.querySelector('#time').value;
-    //     const foodName = foodSection.querySelector('#modal-food-name').textContent;
-    //     const foodBrand = foodSection.querySelector('#modal-food-brand').textContent;
-    //     const foodInfo = foodSection.querySelectorAll('.macroItem');
-    //     let allMacros = '';
-
-    //     foodInfo.forEach(macro => allMacros += macro.textContent);
-
-    //     const macros = getMacros(allMacros);
-
-    //     // console.log(macros);
-
-
-    //     let data = getLocalStorage(date);
-
-    //     // console.log(getLocalStorage(date))
-
-    //     if (data == null) {
-    //         console.log('entries was null');
-    //         data = {foodEntries: [], weight: null};
-    //     }
-
-    //     const entry = {
-    //         "time": time,
-    //         "foodName": foodName.split(": ")[1],
-    //         "foodBrand": foodBrand.split(": ")[1],
-    //         "servings": serving,
-    //         "macros": macros
-    //     }
-
-    //     console.log(data);
-
-    //     data.foodEntries.push(entry);
-
-    //     setLocalStorage(date, data);
-    //     showConfirmation();
-    // }
-
     document.querySelector("#food-form").addEventListener("submit", editEntry);
 
 function editEntry(event) {
-    console.log('button works');
     event.preventDefault();
 
     if (document.querySelector("#food-form-button").classList.contains("isEditing")) {
+        
+        if (document.querySelector("#servings").value <= 0) {
+            displayErrorMessage(document.querySelector(".errorMessage"), "Please input a positive number of servings.");
+        }
+
+        else {
+            document.querySelector(".errorMessage").classList.remove("display");
         localStorageEntry.servings = document.querySelector("#servings").value;
         localStorageEntry.time = document.querySelector("#time").value;
         setLocalStorage(date, dataOnDay);
         closeModal(foodModal);
         // location.reload();
+        }
     }
 
     else if (document.querySelector("#food-form-button").classList.contains("isDeleting")) {
-        console.log('deletebuttonworks');
+        
+        if (document.querySelector("#servings").value <= 0) {
+            displayErrorMessage(document.querySelector(".errorMessage"), "Please input a positive number of servings.");
+        }
+        else {
+            document.querySelector(".errorMessage").classList.remove("display");
         const deleteIndex = dataOnDay.foodEntries.indexOf(localStorageEntry);
         dataOnDay.foodEntries.splice(deleteIndex, 1);
         setLocalStorage(date, dataOnDay);
         closeModal(foodModal);
         // location.reload();
+        }
     }
 
     showConfirmation();

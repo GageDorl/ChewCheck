@@ -15,17 +15,38 @@ canvas{
     font-weight: 800;
 }
 
+.dropDownButton {
+    border-radius: 0px;
+    margin: 0px;
+}
+
 .dropDownMenu {
     display: flex;
     flex-direction: column;
     list-style: none;
     padding: 0px;
     margin: 0px;
+    border-radius: 0px;
+}
+
+.editButton {
+    border-radius: 0px;
+    background-color: var(--accent-color);
+    color: var(--dark-text);
+    border: solid var(--dark-text);
+}
+
+.deleteButton {
+    background-color: var(--accent-color);
+    color: var(--dark-text);
+    border-bottom: solid var(--dark-text);
+    border-left: solid var(--dark-text);
+    border-right: solid var(--dark-text);
 }
 
 .entry {
     display:grid;
-    grid-template-columns:2fr repeat(6, 1fr);
+    grid-template-columns:2fr repeat(5, 1fr) 60px;
     grid-gap: 1px;
     background-color: white;
 }
@@ -90,6 +111,19 @@ canvas{
     border-radius: 5px;
     margin: 10px auto;
     position: relative;
+}
+
+li > div {
+    max-width: 60px;
+    display: flex;
+    flex-direction: column;
+    /* margin: 0px; */
+}
+
+li > div button {
+    border-radius: 0px;
+    margin: 0px;
+    width: 60px;
 }
 
 #macroCounts{

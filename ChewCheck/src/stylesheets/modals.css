@@ -49,3 +49,13 @@
 .confirmation-icon {
     color: var(--dark-text);
 }
+
+.errorMessage {
+    color: red;
+    text-align: center;
+    display: none;
+}
+
+.display {
+    display: block;
+}

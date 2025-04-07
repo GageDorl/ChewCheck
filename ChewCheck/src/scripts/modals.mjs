@@ -12,3 +12,10 @@ export function closeModal(foodModal) {
     foodModal.classList.remove('open');
     foodModal.setAttribute('aria-hidden', 'true');
 }
+
+export function displayErrorMessage(location, message) {
+        console.log(document.querySelector(".errorMessage"));
+        location.textContent = message;
+        location.classList.add("display");
+
+}
