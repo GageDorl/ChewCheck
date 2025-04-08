@@ -156,6 +156,8 @@
     float: right;
     font-size: 3em;
     color: var(--dark-text);
+    position: relative;
+    top: -10px;
 }
 
 .close-button:hover, .close-button:focus {

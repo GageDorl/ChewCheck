@@ -333,7 +333,7 @@ function displayModal(event, buttonType) {
     const localStorageEntry = dataOnDay.foodEntries.find(entry => entry.foodName === foodName && entry.servings == servings);
     console.log(localStorageEntry);
 
-    document.querySelector("#input-date").value = date;
+    document.querySelector("#edit-modal-date").textContent = `${date}  `;
 
     document.querySelector('#modal-food-name').innerHTML = `${foodName}`;
     document.querySelector('#modal-food-brand').innerHTML = `${localStorageEntry.foodBrand}`;

@@ -42,6 +42,16 @@ canvas{
     border: solid var(--dark-text);
 }
 
+#edit-modal-date {
+    background-color: var(--light-text);
+    display: inline-block;
+    width: 50%;
+    padding: 0px;
+    line-height: normal;
+    border-radius: 1px;
+    text-align: right;
+}
+
 .deleteButton {
     background-color: var(--accent-color);
     color: var(--dark-text);
